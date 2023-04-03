@@ -1,25 +1,25 @@
 import React, {ComponentType, memo, useEffect, useMemo, useRef} from 'react';
-import {Animated, Easing, StyleProp, ViewStyle} from 'react-native';
+import {Animated, Easing, StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import BaseLinearGradient from './BaseLinearGradient';
 import {LinearGradientPropsType} from './types';
 
-export type GradientShimmerPropsType = {
+export type GradientShimmerPropsType<LinearGradient extends ComponentType<LinearGradientPropsType>> = {
   /**
    * Linear gradient component from `expo-linear-gradient` or `react-native-linear-gradient`
    */
-  LinearGradientComponent: ComponentType<LinearGradientPropsType>;
+  LinearGradientComponent: LinearGradient;
   /**
    * Component `width` in DPI
    */
-  width: number;
+  width?: number;
   /**
    * Component `height` in DPI
    */
-  height: number;
+  height?: number;
   /**
    * Styles passed to the LinearGradient component
    */
-  style: Omit<StyleProp<ViewStyle>, 'width' | 'height'>;
+  style: StyleProp<ViewStyle>;
   /**
    * Background color in HEX or RGB
    */
@@ -48,9 +48,34 @@ const GradientShimmer = ({
   backgroundColor,
   highlightColor,
 }: GradientShimmerPropsType): JSX.Element => {
-  const overflowWidth = width / 2;
-  const startPosition = width - overflowWidth;
-  const endPosition = width + overflowWidth;
+  const linearGradientStyles = useMemo(() => {
+    const styles = [style];
+    if (typeof height === 'number') {
+      styles.push({height});
+    }
+    if (typeof width === 'number') {
+      styles.push({width});
+    }
+    return styles;
+  }, [height, style, width]);
+
+  const calculatedWidth = useMemo(() => {
+    const {width: flatWidth, height: flatHeight} =
+      StyleSheet.flatten(linearGradientStyles);
+
+    if (typeof flatWidth !== 'number' || typeof flatHeight !== 'number') {
+      console.error(
+        'GradientShimmer requires `width` and `height` to be real positive numbers. You can pass `width` and `height` by prop or inside `style`',
+      );
+      return 100;
+    }
+
+    return flatWidth;
+  }, [linearGradientStyles]);
+
+  const overflowWidth = calculatedWidth / 2;
+  const startPosition = calculatedWidth - overflowWidth;
+  const endPosition = calculatedWidth + overflowWidth;
 
   const position = useRef(new Animated.Value(startPosition));
 
@@ -81,7 +106,7 @@ const GradientShimmer = ({
   const startEndPositions = useMemo(() => {
     const widthReference = 200;
     const overflow = 0.2;
-    const delta = overflow * (widthReference / width) * scale;
+    const delta = overflow * (widthReference / calculatedWidth) * scale;
     const start = 0 - delta;
     const end = 1 + delta;
 
@@ -95,18 +120,7 @@ const GradientShimmer = ({
         outputRange: [start + delta, end + delta],
       }),
     ];
-  }, [endPosition, scale, startPosition, width]);
-
-  const linearGradientStyles = useMemo(
-    () => [
-      style,
-      {
-        height: height,
-        width: width,
-      },
-    ],
-    [height, style, width],
-  );
+  }, [calculatedWidth, endPosition, scale, startPosition]);
 
   return (
     <BaseLinearGradient

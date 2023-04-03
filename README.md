@@ -63,9 +63,9 @@ Or create your own `GradientShimmer` instance with default props:
 
 ```jsx
 import LinearGradient from 'react-native-linear-gradient'; // or 'expo-linear-gradient'
-import GradientShimmer from 'react-native-gradient-shimmer';
+import {createGradientShimmer} from 'react-native-gradient-shimmer';
 
-const CustomGradientShimmer = GradientShimmer.createGradientShimmer({
+const CustomGradientShimmer = createGradientShimmer({
   backgroundColor: 'red',
   highlightColor: 'blue',
   LinearGradientComponent: LinearGradient,
