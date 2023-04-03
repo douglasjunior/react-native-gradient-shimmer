@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "./dist",
     "noEmit": false,
-    "declaration": true
+    "declaration": true,
+    "jsx": "react",
+    "sourceMap": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]

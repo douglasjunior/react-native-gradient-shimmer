@@ -60,12 +60,11 @@ const GradientShimmer = ({
   }, [height, style, width]);
 
   const calculatedWidth = useMemo(() => {
-    const {width: flatWidth, height: flatHeight} =
-      StyleSheet.flatten(linearGradientStyles);
+    const {width: flatWidth} = StyleSheet.flatten(linearGradientStyles);
 
-    if (typeof flatWidth !== 'number' || typeof flatHeight !== 'number') {
+    if (typeof flatWidth !== 'number') {
       console.error(
-        'GradientShimmer requires `width` and `height` to be real positive numbers. You can pass `width` and `height` by prop or inside `style`',
+        'GradientShimmer requires `width` to be real positive numbers. You can pass `width` by prop or inside `style`',
       );
       return 100;
     }
@@ -134,33 +133,13 @@ const GradientShimmer = ({
   );
 };
 
-GradientShimmer.defaultProps = {
+export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
   duration: 1500,
   scale: 20,
   backgroundColor: 'rgb(255,255,255)',
   highlightColor: 'rgb(200,200,200)',
 };
 
-/**
- * Create your own GradientShimmer instance with default props
- */
-export const createGradientShimmer = <
-  FixedProps extends Partial<GradientShimmerPropsType>,
->(
-  fixedProps: FixedProps,
-) => {
-  const GradientShimmerWrapper = (
-    props: GradientShimmerPropsType,
-  ): JSX.Element => {
-    return <GradientShimmer {...props} />;
-  };
-
-  GradientShimmerWrapper.defaultProps = {
-    ...GradientShimmer.defaultProps,
-    ...fixedProps,
-  };
-
-  return memo(GradientShimmerWrapper);
-};
+GradientShimmer.defaultProps = gradientShimmerDefaultProps;
 
 export default memo(GradientShimmer);

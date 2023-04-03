@@ -6,8 +6,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
-// import LinearGradient from 'react-native-linear-gradient';
+// import {LinearGradient} from 'expo-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import GradientShimmer, {
   createGradientShimmer,
 } from 'react-native-gradient-shimmer';

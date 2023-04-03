@@ -1,4 +1,4 @@
-import {StyleProp, ViewStyle} from 'react-native/types';
+import type {StyleProp, ViewStyle} from 'react-native/types';
 
 export type LinearGradientPropsType = {
   colors: any;
