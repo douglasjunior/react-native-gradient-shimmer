@@ -130,7 +130,7 @@ GradientShimmer.defaultProps = {
 /**
  * Create your own GradientShimmer instance with default props
  */
-GradientShimmer.createGradientShimmer = <
+export const createGradientShimmer = <
   FixedProps extends Partial<GradientShimmerPropsType>,
 >(
   fixedProps: FixedProps,
