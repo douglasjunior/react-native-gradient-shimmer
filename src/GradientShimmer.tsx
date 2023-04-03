@@ -3,11 +3,11 @@ import {Animated, Easing, StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import BaseLinearGradient from './BaseLinearGradient';
 import {LinearGradientPropsType} from './types';
 
-export type GradientShimmerPropsType<LinearGradient extends ComponentType<LinearGradientPropsType>> = {
+export type GradientShimmerPropsType = {
   /**
    * Linear gradient component from `expo-linear-gradient` or `react-native-linear-gradient`
    */
-  LinearGradientComponent: LinearGradient;
+  LinearGradientComponent: ComponentType<LinearGradientPropsType>;
   /**
    * Component `width` in DPI
    */
