@@ -38,6 +38,12 @@ export type GradientShimmerPropsType = {
   duration: number;
 };
 
+const isRealPositiveNumber = (value: unknown): value is number => {
+  return Boolean(
+    value && Number.isFinite(value) && typeof value === 'number' && value > 0,
+  );
+};
+
 const GradientShimmer = ({
   duration,
   height,
@@ -62,7 +68,7 @@ const GradientShimmer = ({
   const calculatedWidth = useMemo(() => {
     const {width: flatWidth} = StyleSheet.flatten(linearGradientStyles);
 
-    if (!flatWidth || !Number.isFinite(flatWidth)) {
+    if (!isRealPositiveNumber(flatWidth)) {
       console.error(
         'GradientShimmer requires `width` to be real positive numbers. You can pass `width` by prop or inside `style`',
       );
