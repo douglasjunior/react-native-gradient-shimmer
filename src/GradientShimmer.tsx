@@ -62,7 +62,7 @@ const GradientShimmer = ({
   const calculatedWidth = useMemo(() => {
     const {width: flatWidth} = StyleSheet.flatten(linearGradientStyles);
 
-    if (typeof flatWidth !== 'number') {
+    if (!flatWidth || !Number.isFinite(flatWidth)) {
       console.error(
         'GradientShimmer requires `width` to be real positive numbers. You can pass `width` by prop or inside `style`',
       );
@@ -100,7 +100,7 @@ const GradientShimmer = ({
     return () => {
       animation.stop();
     };
-  }, [duration, width, width, startPosition, endPosition]);
+  }, [duration, startPosition, endPosition]);
 
   const startEndPositions = useMemo(() => {
     const widthReference = 200;
