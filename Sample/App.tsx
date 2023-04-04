@@ -11,7 +11,10 @@ import {
 import {LinearGradient} from 'expo-linear-gradient';
 
 // import LinearGradient from 'react-native-linear-gradient';
-import {createGradientShimmer} from 'react-native-gradient-shimmer';
+import {
+  createGradientShimmer,
+  GradientShimmerPropsType,
+} from 'react-native-gradient-shimmer';
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -75,7 +78,10 @@ const AvatarShimmer = () => {
   );
 };
 
-const CardFullSizeShimmer = () => {
+const CardShimmer = ({
+  label,
+  ...others
+}: Partial<GradientShimmerPropsType> & {label: string}) => {
   const {width} = useWindowDimensions();
   const horizontalMargin = 16;
 
@@ -84,13 +90,14 @@ const CardFullSizeShimmer = () => {
       style={{
         marginHorizontal: horizontalMargin,
       }}>
-      <Text style={styles.label}>Card Full Size</Text>
+      <Text style={styles.label}>{label}</Text>
       <CreatedGradientShimmer
         height={120}
         width={width - horizontalMargin * 2}
         style={{
           borderRadius: 8,
         }}
+        {...others}
       />
     </View>
   );
@@ -104,7 +111,7 @@ const CardHorizontalShimmer = () => {
       style={{
         marginHorizontal: horizontalMargin,
       }}>
-      <Text style={styles.label}>Horizontal Cards</Text>
+      <Text style={styles.label}>Horizontal cards</Text>
       <View
         style={{
           flexDirection: 'row',
@@ -127,51 +134,6 @@ const CardHorizontalShimmer = () => {
   );
 };
 
-const CustomColorsShimmer = () => {
-  const {width} = useWindowDimensions();
-  const horizontalMargin = 16;
-
-  return (
-    <View
-      style={{
-        marginHorizontal: horizontalMargin,
-      }}>
-      <Text style={styles.label}>Custom Colors</Text>
-      <CreatedGradientShimmer
-        height={120}
-        width={width - horizontalMargin * 2}
-        style={{
-          borderRadius: 8,
-        }}
-        backgroundColor="#f00"
-        highlightColor="#00f"
-      />
-    </View>
-  );
-};
-
-const CustomScaleShimmer = () => {
-  const {width} = useWindowDimensions();
-  const horizontalMargin = 16;
-
-  return (
-    <View
-      style={{
-        marginHorizontal: horizontalMargin,
-      }}>
-      <Text style={styles.label}>Custom Scale</Text>
-      <CreatedGradientShimmer
-        height={120}
-        width={width - horizontalMargin * 2}
-        style={{
-          borderRadius: 8,
-        }}
-        scale={1}
-      />
-    </View>
-  );
-};
-
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -180,13 +142,19 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <AvatarShimmer />
 
-        <CardFullSizeShimmer />
-
         <CardHorizontalShimmer />
 
-        <CustomScaleShimmer />
+        <CardShimmer label="Card full size" />
 
-        <CustomColorsShimmer />
+        <CardShimmer label="Custom highlight width" highlightWidth={50} />
+
+        <CardShimmer label="Custom duration" duration={500} />
+
+        <CardShimmer
+          label="Custom colors"
+          backgroundColor="red"
+          highlightColor="blue"
+        />
       </ScrollView>
     </SafeAreaView>
   );

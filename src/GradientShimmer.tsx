@@ -1,5 +1,12 @@
 import React, {ComponentType, memo, useEffect, useMemo, useRef} from 'react';
-import {Animated, Easing, StyleProp, StyleSheet, ViewStyle} from 'react-native';
+import {
+  Animated,
+  Easing,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import BaseLinearGradient from './BaseLinearGradient';
 import {LinearGradientPropsType} from './types';
 
@@ -29,9 +36,9 @@ export type GradientShimmerPropsType = {
    */
   highlightColor: string;
   /**
-   * Scale factor to customize the highlight size
+   * The size of the highlight effect in DPI
    */
-  scale: number;
+  highlightWidth: number;
   /**
    * Duration of the animation in milliseconds
    */
@@ -52,15 +59,25 @@ const GradientShimmer = ({
   duration,
   height,
   width,
-  scale,
   style,
   LinearGradientComponent,
   backgroundColor,
   highlightColor,
+  highlightWidth,
   animating,
 }: GradientShimmerPropsType): JSX.Element => {
-  const linearGradientStyles = useMemo(() => {
-    const styles = [style];
+  const startPosition = 0 - highlightWidth;
+
+  const position = useRef(new Animated.Value(startPosition));
+
+  const containerStyles = useMemo(() => {
+    const styles: StyleProp<ViewStyle>[] = [
+      style,
+      {
+        overflow: 'hidden',
+        backgroundColor,
+      },
+    ];
     if (typeof height === 'number') {
       styles.push({height});
     }
@@ -68,10 +85,28 @@ const GradientShimmer = ({
       styles.push({width});
     }
     return styles;
-  }, [height, style, width]);
+  }, [height, style, width, backgroundColor]);
+
+  const linearLayoutStyles = useMemo(() => {
+    const styles: StyleProp<ViewStyle>[] = [
+      {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        width: highlightWidth,
+        transform: [
+          {
+            translateX: position.current as unknown as number,
+          },
+        ],
+      },
+    ];
+    return styles;
+  }, [highlightWidth]);
 
   const calculatedWidth = useMemo(() => {
-    const {width: flatWidth} = StyleSheet.flatten(linearGradientStyles);
+    const {width: flatWidth} = StyleSheet.flatten(containerStyles);
 
     if (!isRealPositiveNumber(flatWidth)) {
       console.error(
@@ -81,17 +116,14 @@ const GradientShimmer = ({
     }
 
     return flatWidth;
-  }, [linearGradientStyles]);
+  }, [containerStyles]);
 
-  const overflowWidth = calculatedWidth / 2;
-  const startPosition = calculatedWidth - overflowWidth;
-  const endPosition = calculatedWidth + overflowWidth;
-
-  const position = useRef(new Animated.Value(startPosition));
+  const endPosition = calculatedWidth + highlightWidth;
 
   useEffect(() => {
+    position.current.setValue(startPosition);
+
     if (!animating) {
-      position.current.setValue(startPosition);
       return undefined;
     }
 
@@ -101,12 +133,12 @@ const GradientShimmer = ({
           toValue: endPosition,
           duration: duration,
           easing: Easing.sin,
-          useNativeDriver: false,
+          useNativeDriver: true,
         }),
         Animated.timing(position.current, {
           toValue: startPosition,
           duration: 0,
-          useNativeDriver: false,
+          useNativeDriver: true,
         }),
       ]),
     );
@@ -118,42 +150,22 @@ const GradientShimmer = ({
     };
   }, [animating, duration, startPosition, endPosition]);
 
-  const startEndPositions = useMemo(() => {
-    const widthReference = 200;
-    const overflow = 0.2;
-    const delta = overflow * (widthReference / calculatedWidth) * scale;
-    const start = 0 - delta;
-    const end = 1 + delta;
-
-    return [
-      position.current.interpolate({
-        inputRange: [startPosition, endPosition],
-        outputRange: [start, end],
-      }),
-      position.current.interpolate({
-        inputRange: [startPosition, endPosition],
-        outputRange: [start + delta, end + delta],
-      }),
-    ];
-  }, [calculatedWidth, endPosition, scale, startPosition]);
-
   return (
-    <BaseLinearGradient
-      LinearGradient={LinearGradientComponent}
-      style={linearGradientStyles}
-      start={startEndPositions[0]}
-      end={startEndPositions[1]}
-      backgroundColor={backgroundColor}
-      highlightColor={highlightColor}
-    />
+    <View style={containerStyles}>
+      <BaseLinearGradient
+        LinearGradient={LinearGradientComponent}
+        style={linearLayoutStyles}
+        highlightColor={highlightColor}
+      />
+    </View>
   );
 };
 
 export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
   duration: 1500,
-  scale: 20,
-  backgroundColor: 'rgb(255,255,255)',
-  highlightColor: 'rgb(200,200,200)',
+  highlightWidth: 200,
+  highlightColor: 'rgb(210,210,210)',
+  backgroundColor: 'rgb(200,200,200)',
   animating: true,
 };
 

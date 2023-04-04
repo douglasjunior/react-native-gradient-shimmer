@@ -102,7 +102,7 @@ See more in the [Sample project](https://github.com/douglasjunior/react-native-g
 |height|`number`||Component `height` in DPI|
 |backgroundColor|`string`|`'rgb(255,255,255)'`|Background color in HEX or RGB|
 |highlightColor|`string`|`'rgb(200,200,200)'`|Highlight color in HEX or RGB|
-|scale|`number`|`20`|Scale factor to customize the highlight size|
+|highlightWidth|`number`|`200`|The size of the highlight effect in DPI|
 |duration|`number`|`1500`|Duration of the animation in milliseconds|
 |animating|`boolean`|`true`|Start or stop the animation|
 |style|[ViewStyle](https://reactnative.dev/docs/view-style-props)||Styles passed to the LinearGradient component|
