@@ -36,6 +36,10 @@ export type GradientShimmerPropsType = {
    * Duration of the animation in milliseconds
    */
   duration: number;
+  /**
+   * Start or stop de animation
+   */
+  animating: boolean;
 };
 
 const isRealPositiveNumber = (value: unknown): value is number => {
@@ -53,6 +57,7 @@ const GradientShimmer = ({
   LinearGradientComponent,
   backgroundColor,
   highlightColor,
+  animating,
 }: GradientShimmerPropsType): JSX.Element => {
   const linearGradientStyles = useMemo(() => {
     const styles = [style];
@@ -85,6 +90,11 @@ const GradientShimmer = ({
   const position = useRef(new Animated.Value(startPosition));
 
   useEffect(() => {
+    if (!animating) {
+      position.current.setValue(startPosition);
+      return undefined;
+    }
+
     const animation = Animated.loop(
       Animated.sequence([
         Animated.timing(position.current, {
@@ -106,7 +116,7 @@ const GradientShimmer = ({
     return () => {
       animation.stop();
     };
-  }, [duration, startPosition, endPosition]);
+  }, [animating, duration, startPosition, endPosition]);
 
   const startEndPositions = useMemo(() => {
     const widthReference = 200;
@@ -144,6 +154,7 @@ export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
   scale: 20,
   backgroundColor: 'rgb(255,255,255)',
   highlightColor: 'rgb(200,200,200)',
+  animating: true,
 };
 
 GradientShimmer.defaultProps = gradientShimmerDefaultProps;

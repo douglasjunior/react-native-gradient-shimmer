@@ -100,6 +100,7 @@ export default App;
 |highlightColor|`string`|`'rgb(200,200,200)'`|Highlight color in HEX or RGB|
 |scale|`number`|`20`|Scale factor to customize the highlight size|
 |duration|`number`|`1500`|Duration of the animation in milliseconds|
+|animating|`boolean`|`true`|Start or stop the animation|
 |style|[ViewStyle](https://reactnative.dev/docs/view-style-props)||Styles passed to the LinearGradient component|
 
 ## Contribute
