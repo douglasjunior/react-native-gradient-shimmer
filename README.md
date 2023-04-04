@@ -43,7 +43,7 @@ import GradientShimmer from 'react-native-gradient-shimmer';
 const App = () => {
    return (
       <SafeAreaView style={{flex: 1}}>
-         <PdfRendererView
+         <GradientShimmer
             LinearGradientComponent={LinearGradient}
             backgroundColor="red"
             highlightColor="blue"
