@@ -89,6 +89,8 @@ const App = () => {
 export default App;
 ```
 
+See more in the [Sample project](https://github.com/douglasjunior/react-native-gradient-shimmer/blob/main/Sample/App.tsx).
+
 ## GradientShimmer props
 
 |Name|Value|Default|Description|
