@@ -8,6 +8,8 @@
 
 It uses React Native [Animated](https://reactnative.dev/docs/animated) API for animation, and [expo-linear-gradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/) or [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient) for the gradient effect.
 
+Take a look at the [Online demo](https://snack.expo.dev/@douglasjunior/react-native-gradient-shimmer).
+
 |Android|iOS|
 |-|-|
 |<img src="https://github.com/douglasjunior/react-native-gradient-shimmer/raw/main/screenshots/android.gif" width="240"/>|<img src="https://github.com/douglasjunior/react-native-gradient-shimmer/raw/main/screenshots/ios.gif" width="240"/>
