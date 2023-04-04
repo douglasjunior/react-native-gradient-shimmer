@@ -80,11 +80,12 @@ const AvatarShimmer = () => {
 
 const CardShimmer = ({
   label,
+  width,
   ...others
-}: Partial<GradientShimmerPropsType> & {label: string}) => {
-  const {width} = useWindowDimensions();
+}: Partial<GradientShimmerPropsType> & {label: string; width?: number}) => {
+  const {width: windowWidth} = useWindowDimensions();
   const horizontalMargin = 16;
-
+  const shimmerWidth = width || windowWidth - horizontalMargin * 2;
   return (
     <View
       style={{
@@ -93,7 +94,7 @@ const CardShimmer = ({
       <Text style={styles.label}>{label}</Text>
       <CreatedGradientShimmer
         height={120}
-        width={width - horizontalMargin * 2}
+        width={shimmerWidth}
         style={{
           borderRadius: 8,
         }}
@@ -155,6 +156,8 @@ export default function App() {
           backgroundColor="red"
           highlightColor="blue"
         />
+
+        <CardShimmer label="Custom width (5000px)" width={5000} />
       </ScrollView>
     </SafeAreaView>
   );
