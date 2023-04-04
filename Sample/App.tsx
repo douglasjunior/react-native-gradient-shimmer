@@ -9,6 +9,7 @@ import {
   Text,
 } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
+
 // import LinearGradient from 'react-native-linear-gradient';
 import {createGradientShimmer} from 'react-native-gradient-shimmer';
 
@@ -17,14 +18,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ddd',
   },
-  container: {
-    flex: 1,
-  },
   label: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
     marginTop: 16,
+  },
+  scrollViewContainer: {
+    paddingBottom: 16,
   },
 });
 
@@ -176,7 +177,7 @@ export default function App() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="auto" translucent={false} />
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <AvatarShimmer />
 
         <CardFullSizeShimmer />
