@@ -11,6 +11,8 @@ const packageJsonPath = path.resolve(__dirname, '..', 'package.json');
 
 const content = JSON.stringify(packageJson, null, 2) + '\n';
 
+child_process.execSync('npm run build');
+
 fs.writeFileSync(packageJsonPath, content, {
   encoding: 'utf-8',
 });
