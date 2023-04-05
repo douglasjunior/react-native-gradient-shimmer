@@ -100,8 +100,8 @@ See more in the [Sample project](https://github.com/douglasjunior/react-native-g
 |LinearGradientComponent|`ComponentType`||Linear gradient component from [expo-linear-gradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/) or [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient)|
 |width|`number`||Component `width` in DPI|
 |height|`number`||Component `height` in DPI|
-|backgroundColor|`string`|`'rgb(255,255,255)'`|Background color in HEX or RGB|
-|highlightColor|`string`|`'rgb(200,200,200)'`|Highlight color in HEX or RGB|
+|backgroundColor|`string`|`'rgb(200,200,200)'`|Background color in HEX or RGB|
+|highlightColor|`string`|`'rgb(210,210,210)'`|Highlight color in HEX or RGB|
 |highlightWidth|`number`|`200`|The size of the highlight effect in DPI|
 |duration|`number`|`1500`|Duration of the animation in milliseconds|
 |animating|`boolean`|`true`|Start or stop the animation|
