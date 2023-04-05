@@ -4,15 +4,15 @@
 [![npm version](https://img.shields.io/npm/v/react-native-gradient-shimmer.svg)](https://www.npmjs.com/package/react-native-gradient-shimmer?activeTab=versions)
 [![npm downloads](https://img.shields.io/npm/dt/react-native-gradient-shimmer.svg)](https://www.npmjs.com/package/react-native-gradient-shimmer)
 
-⚛ A pure JavaScript, performant, typed shimmer component for Android and iOS.
+⚛ A pure JavaScript, performant, typed shimmer component for Android, iOS and Web.
 
 It uses React Native [Animated](https://reactnative.dev/docs/animated) API for animation, and [expo-linear-gradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/) or [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient) for the gradient effect.
 
 Take a look at the [Online demo](https://snack.expo.dev/@douglasjunior/react-native-gradient-shimmer).
 
-|Android|iOS|
-|-|-|
-|<img src="https://github.com/douglasjunior/react-native-gradient-shimmer/raw/main/screenshots/android.gif" width="240"/>|<img src="https://github.com/douglasjunior/react-native-gradient-shimmer/raw/main/screenshots/ios.gif" width="240"/>
+|Android|iOS|Web|
+|-|-|-|
+|<img src="https://github.com/douglasjunior/react-native-gradient-shimmer/raw/main/screenshots/android.gif" width="240"/>|<img src="https://github.com/douglasjunior/react-native-gradient-shimmer/raw/main/screenshots/ios.gif" width="240"/>|<img src="https://github.com/douglasjunior/react-native-gradient-shimmer/raw/main/screenshots/web.gif" width="240"/>
 
 ## Requirements
 

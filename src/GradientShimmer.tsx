@@ -7,6 +7,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
 import BaseLinearGradient from './BaseLinearGradient';
 import {LinearGradientPropsType} from './types';
 
@@ -156,6 +157,7 @@ const GradientShimmer = ({
         LinearGradient={LinearGradientComponent}
         style={linearLayoutStyles}
         highlightColor={highlightColor}
+        backgroundColor={backgroundColor}
       />
     </View>
   );
