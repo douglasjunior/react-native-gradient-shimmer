@@ -2,6 +2,7 @@ import React, {ComponentType, memo, useEffect, useMemo, useRef} from 'react';
 import {
   Animated,
   Easing,
+  EasingFunction,
   StyleProp,
   StyleSheet,
   View,
@@ -48,6 +49,10 @@ export type GradientShimmerPropsType = {
    * Start or stop de animation
    */
   animating: boolean;
+  /**
+   * Easing animation
+   */
+  easing: EasingFunction;
 };
 
 const isRealPositiveNumber = (value: unknown): value is number => {
@@ -66,6 +71,7 @@ const GradientShimmer = ({
   highlightColor,
   highlightWidth,
   animating,
+  easing,
 }: GradientShimmerPropsType): JSX.Element => {
   const startPosition = 0 - highlightWidth;
 
@@ -133,7 +139,7 @@ const GradientShimmer = ({
         Animated.timing(position.current, {
           toValue: endPosition,
           duration: duration,
-          easing: Easing.sin,
+          easing,
           useNativeDriver: true,
         }),
         Animated.timing(position.current, {
@@ -149,7 +155,7 @@ const GradientShimmer = ({
     return () => {
       animation.stop();
     };
-  }, [animating, duration, startPosition, endPosition]);
+  }, [animating, duration, startPosition, endPosition, easing]);
 
   return (
     <View style={containerStyles}>
@@ -169,6 +175,7 @@ export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
   highlightColor: 'rgb(210,210,210)',
   backgroundColor: 'rgb(200,200,200)',
   animating: true,
+  easing: Easing.linear,
 };
 
 GradientShimmer.defaultProps = gradientShimmerDefaultProps;
