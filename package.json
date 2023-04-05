@@ -31,7 +31,7 @@
   "homepage": "https://github.com/douglasjunior/react-native-gradient-shimmer",
   "scripts": {
     "build": "tsc",
-    "publish": "node scripts/pre-publish.js"
+    "publish-script": "node scripts/publish.js"
   },
   "peerDependencies": {
     "react-native": ">=0.60"
