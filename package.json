@@ -30,9 +30,8 @@
   },
   "homepage": "https://github.com/douglasjunior/react-native-gradient-shimmer",
   "scripts": {
-    "prepublishOnly": "run-s build pre-publish-script",
     "build": "tsc",
-    "pre-publish-script": "node scripts/pre-publish.js"
+    "publish": "node scripts/pre-publish.js"
   },
   "peerDependencies": {
     "react-native": ">=0.60"
