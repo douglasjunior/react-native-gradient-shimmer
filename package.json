@@ -3,7 +3,7 @@
   "displayName": "React-Native Gradient Renderer",
   "version": "1.0.1",
   "description": "⚛ A pure JavaScript, performant, typed shimmer component for Android and iOS.",
-  "main": "src",
+  "main": "dist",
   "license": "MIT",
   "private": false,
   "repository": {
@@ -14,8 +14,11 @@
     "react-native",
     "android",
     "ios",
+    "web",
     "shimmer",
-    "skeleton"
+    "skeleton",
+    "animated",
+    "linear-gradient"
   ],
   "author": {
     "name": "Douglas Nassif Roma Junior",
@@ -53,5 +56,6 @@
     "react-native": "0.71.4",
     "react-test-renderer": "18.2.0",
     "typescript": "4.8.4"
-  }
+  },
+  "types": "dist"
 }
