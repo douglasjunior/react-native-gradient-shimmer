@@ -72,7 +72,7 @@ export type GradientShimmerPropsType = {
    */
   animating: boolean;
   /**
-   * Easing animation
+   * Easing function used by `Animated.timing()` to convey physically believable motion in animations. Read more at https://reactnative.dev/docs/easing
    */
   easing: EasingFunction;
 };

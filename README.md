@@ -105,7 +105,7 @@ See more in the [Sample project](https://github.com/douglasjunior/react-native-g
 |highlightWidth|`number`|`200`|The size of the highlight effect in DPI|
 |duration|`number`|`1500`|Duration of the animation in milliseconds|
 |animating|`boolean`|`true`|Start or stop the animation|
-|easing|`EasingFunction`|`Easing.linear`|Used by `Animated.timing()` to convey physically believable motion in animations. Read more at https://reactnative.dev/docs/easing|
+|easing|`(value: number) => number`|`Easing.linear`|Easing function used by `Animated.timing()` to convey physically believable motion in animations. Read more at https://reactnative.dev/docs/easing|
 |style|[ViewStyle](https://reactnative.dev/docs/view-style-props)||Styles passed to the LinearGradient component|
 
 ## Contribute
