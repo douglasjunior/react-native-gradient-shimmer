@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatusBar} from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import {
   SafeAreaView,
   useWindowDimensions,
@@ -8,7 +8,7 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 
 // import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -32,10 +32,13 @@ const styles = StyleSheet.create({
   },
 });
 
-function easeInOutCirc(x: number): number {
-  return x < 0.5
-    ? (1 - Math.sqrt(1 - Math.pow(2 * x, 2))) / 2
-    : (Math.sqrt(1 - Math.pow(-2 * x + 2, 2)) + 1) / 2;
+/**
+ * https://easings.net/#easeInOutCirc
+ */
+function easeInOutCirc(value: number): number {
+  return value < 0.5
+    ? (1 - Math.sqrt(1 - Math.pow(2 * value, 2))) / 2
+    : (Math.sqrt(1 - Math.pow(-2 * value + 2, 2)) + 1) / 2;
 }
 
 const CreatedGradientShimmer = createGradientShimmer({
@@ -44,7 +47,7 @@ const CreatedGradientShimmer = createGradientShimmer({
 });
 
 const AvatarShimmer = () => {
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const avatarWidth = 114;
   const horizontalMargin = 16;
   const distanceBetween = 8;
@@ -54,7 +57,7 @@ const AvatarShimmer = () => {
         marginHorizontal: horizontalMargin,
       }}>
       <Text style={styles.label}>Avatar</Text>
-      <View style={{flexDirection: 'row', marginVertical: 16}}>
+      <View style={{ flexDirection: 'row', marginVertical: 16 }}>
         <CreatedGradientShimmer
           height={avatarWidth}
           width={avatarWidth}
@@ -67,17 +70,17 @@ const AvatarShimmer = () => {
           <CreatedGradientShimmer
             height={30}
             width={width - horizontalMargin * 2 - avatarWidth - distanceBetween}
-            style={{marginBottom: 8, borderRadius: 2}}
+            style={{ marginBottom: 8, borderRadius: 2 }}
           />
           <CreatedGradientShimmer
             height={30}
             width={width - horizontalMargin * 2 - avatarWidth - distanceBetween}
-            style={{marginBottom: 8, borderRadius: 2}}
+            style={{ marginBottom: 8, borderRadius: 2 }}
           />
           <CreatedGradientShimmer
             height={30}
             width={width - horizontalMargin * 2 - avatarWidth - distanceBetween}
-            style={{marginBottom: 8, borderRadius: 2}}
+            style={{ marginBottom: 8, borderRadius: 2 }}
           />
         </View>
       </View>
@@ -89,8 +92,8 @@ const CardShimmer = ({
   label,
   width,
   ...others
-}: Partial<GradientShimmerPropsType> & {label: string; width?: number}) => {
-  const {width: windowWidth} = useWindowDimensions();
+}: Partial<GradientShimmerPropsType> & { label: string; width?: number }) => {
+  const { width: windowWidth } = useWindowDimensions();
   const horizontalMargin = 16;
   const shimmerWidth = width || windowWidth - horizontalMargin * 2;
   return (
