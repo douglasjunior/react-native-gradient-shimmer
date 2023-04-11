@@ -8,9 +8,10 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
 
 // import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
+
 import {
   ShimmerLayout,
   ShimmerLayoutContainerType,
