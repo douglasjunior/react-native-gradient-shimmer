@@ -93,9 +93,68 @@ export default App;
 
 See more in the [Sample project](https://github.com/douglasjunior/react-native-gradient-shimmer/blob/main/Sample/App.tsx).
 
-## GradientShimmer props
+## Shimmer layout
 
-|Name|Value|Default|Description|
+For more complex layouts, you can use the `ShimmerLayout` component.
+
+```jsx
+import LinearGradient from 'react-native-linear-gradient'; // or 'expo-linear-gradient'
+import {ShimmerLayout} from 'react-native-gradient-shimmer';
+
+const layoutExample: ShimmerLayoutContainerType = {
+   content: [
+      {
+         flexDirection: 'row',
+         content: [
+            {
+               height: 150,
+               width: 100,
+               marginRight: 16,
+            },
+            {
+               justifyContent: 'space-between',
+               content: [
+               {
+                  height: 40,
+                  width: 250,
+               },
+               {
+                  height: 40,
+                  width: 250,
+               },
+               {
+                  height: 40,
+                  width: 120,
+               },
+               ],
+            },
+         ],
+      },
+      // ....
+   ],
+};
+
+const App = () => {
+   return (
+      <SafeAreaView style={{flex: 1}}>
+         <ShimmerLayout
+            LinearGradientComponent={LinearGradient}
+            layout={layoutExample}
+         />
+      </SafeAreaView>
+   );
+}
+
+export default App;
+```
+
+See more in the [Sample project](https://github.com/douglasjunior/react-native-gradient-shimmer/blob/main/Sample/App.tsx).
+
+## Props and types
+
+### GradientShimmer props
+
+|Name|Type|Default|Description|
 |-|-|-|-|
 |LinearGradientComponent|`ComponentType`||Linear gradient component from [expo-linear-gradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/) or [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient)|
 |width|`number`||Component `width` in DPI|
@@ -107,6 +166,30 @@ See more in the [Sample project](https://github.com/douglasjunior/react-native-g
 |animating|`boolean`|`true`|Start or stop the animation|
 |easing|`(value: number) => number`|`Easing.linear`|Easing function used by `Animated.timing()` to convey physically believable motion in animations. Read more at https://reactnative.dev/docs/easing|
 |style|[ViewStyle](https://reactnative.dev/docs/view-style-props)||Styles passed to the LinearGradient component|
+
+### ShimmerLayout props
+
+*Inherits [`GradientShimmer` props](#GradientShimmer)*
+
+|Name|Type|Description|
+|-|-|-|
+|layout|`ShimmerLayoutContainerType`|Layout config tree|
+
+### ShimmerLayoutContainerType
+
+|Name|Type|Description|
+|-|-|-|
+|flexDirection|'row' \| 'column' \| 'row-reverse' \| 'column-reverse' \| undefined|FlexBox flexDirection|
+|alignItems|`FlexAlignType`|FlexBox alignItems|
+|justifyContent|`FlexAlignType`|FlexBox justifyContent|
+|content|`Array<ShimmerLayoutItemType \| ShimmerLayoutContainerType>`|Children content layout|
+
+### ShimmerLayoutItemType
+
+|Name|Type|Description|
+|-|-|-|
+|width|`number`|Item `width` in DPI|
+|height|`number`|Item `height` in DPI|
 
 ## Contribute
 

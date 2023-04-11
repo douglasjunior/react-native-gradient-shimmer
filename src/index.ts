@@ -23,4 +23,11 @@
 export {default} from './GradientShimmer';
 export type {GradientShimmerPropsType} from './GradientShimmer';
 
+export {default as ShimmerLayout} from './ShimmerLayout';
+export type {
+  ShimmerLayoutPropsType,
+  ShimmerLayoutContainerType,
+  ShimmerLayoutItemType,
+} from './ShimmerLayout';
+
 export {default as createGradientShimmer} from './createGradientShimmer';

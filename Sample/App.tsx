@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
+import {StatusBar} from 'expo-status-bar';
 import {
   SafeAreaView,
   useWindowDimensions,
@@ -8,10 +8,12 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 
 // import LinearGradient from 'react-native-linear-gradient';
 import {
+  ShimmerLayout,
+  ShimmerLayoutContainerType,
   createGradientShimmer,
   GradientShimmerPropsType,
 } from 'react-native-gradient-shimmer';
@@ -47,7 +49,7 @@ const CreatedGradientShimmer = createGradientShimmer({
 });
 
 const AvatarShimmer = () => {
-  const { width } = useWindowDimensions();
+  const {width} = useWindowDimensions();
   const avatarWidth = 114;
   const horizontalMargin = 16;
   const distanceBetween = 8;
@@ -57,7 +59,7 @@ const AvatarShimmer = () => {
         marginHorizontal: horizontalMargin,
       }}>
       <Text style={styles.label}>Avatar</Text>
-      <View style={{ flexDirection: 'row', marginVertical: 16 }}>
+      <View style={{flexDirection: 'row', marginVertical: 16}}>
         <CreatedGradientShimmer
           height={avatarWidth}
           width={avatarWidth}
@@ -70,17 +72,17 @@ const AvatarShimmer = () => {
           <CreatedGradientShimmer
             height={30}
             width={width - horizontalMargin * 2 - avatarWidth - distanceBetween}
-            style={{ marginBottom: 8, borderRadius: 2 }}
+            style={{marginBottom: 8, borderRadius: 2}}
           />
           <CreatedGradientShimmer
             height={30}
             width={width - horizontalMargin * 2 - avatarWidth - distanceBetween}
-            style={{ marginBottom: 8, borderRadius: 2 }}
+            style={{marginBottom: 8, borderRadius: 2}}
           />
           <CreatedGradientShimmer
             height={30}
             width={width - horizontalMargin * 2 - avatarWidth - distanceBetween}
-            style={{ marginBottom: 8, borderRadius: 2 }}
+            style={{marginBottom: 8, borderRadius: 2}}
           />
         </View>
       </View>
@@ -92,8 +94,8 @@ const CardShimmer = ({
   label,
   width,
   ...others
-}: Partial<GradientShimmerPropsType> & { label: string; width?: number }) => {
-  const { width: windowWidth } = useWindowDimensions();
+}: Partial<GradientShimmerPropsType> & {label: string; width?: number}) => {
+  const {width: windowWidth} = useWindowDimensions();
   const horizontalMargin = 16;
   const shimmerWidth = width || windowWidth - horizontalMargin * 2;
   return (
@@ -145,6 +147,86 @@ const CardHorizontalShimmer = () => {
   );
 };
 
+const layoutExample: ShimmerLayoutContainerType = {
+  content: [
+    {
+      flexDirection: 'row',
+      content: [
+        {
+          height: 150,
+          width: 100,
+          marginRight: 16,
+        },
+        {
+          justifyContent: 'space-between',
+          content: [
+            {
+              height: 40,
+              width: 250,
+            },
+            {
+              height: 40,
+              width: 250,
+            },
+            {
+              height: 40,
+              width: 120,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      marginTop: 16,
+      flexDirection: 'row',
+      content: [
+        {
+          width: 100,
+          height: 100,
+          marginRight: 16,
+        },
+        {
+          width: 100,
+          height: 100,
+          marginRight: 16,
+        },
+        {
+          width: 100,
+          height: 100,
+          marginRight: 16,
+        },
+        {
+          width: 100,
+          height: 100,
+          marginRight: 16,
+        },
+        {
+          width: 100,
+          height: 100,
+          marginRight: 16,
+        },
+      ],
+    },
+  ],
+};
+
+const ShimmerLayoutExample = () => {
+  const horizontalMargin = 16;
+
+  return (
+    <View
+      style={{
+        marginHorizontal: horizontalMargin,
+      }}>
+      <Text style={styles.label}>Shimmer layout</Text>
+      <ShimmerLayout
+        LinearGradientComponent={LinearGradient}
+        layout={layoutExample}
+      />
+    </View>
+  );
+};
+
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -168,6 +250,8 @@ export default function App() {
         />
 
         <CardShimmer label="Custom width (5000px)" width={5000} />
+
+        <ShimmerLayoutExample />
       </ScrollView>
     </SafeAreaView>
   );

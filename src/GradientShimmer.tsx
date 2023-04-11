@@ -20,7 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React, {ComponentType, memo, useEffect, useMemo, useRef} from 'react';
+import React, {
+  ComponentType,
+  memo,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+} from 'react';
 import {
   Animated,
   Easing,
@@ -31,6 +39,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import {AnimationContext} from './AnimationProvider';
 import BaseLinearGradient from './BaseLinearGradient';
 import {LinearGradientPropsType} from './types';
 
@@ -95,6 +104,9 @@ const GradientShimmer = ({
   animating,
   easing,
 }: GradientShimmerPropsType): JSX.Element => {
+  const {registerAnimation} = useContext(AnimationContext) || {};
+  const componentId = useId();
+
   const startPosition = 0 - highlightWidth;
 
   const position = useRef(new Animated.Value(startPosition));
@@ -152,32 +164,45 @@ const GradientShimmer = ({
   useEffect(() => {
     position.current.setValue(startPosition);
 
+    const animation = Animated.sequence([
+      Animated.timing(position.current, {
+        toValue: endPosition,
+        duration: duration,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.timing(position.current, {
+        toValue: startPosition,
+        duration: 0,
+        useNativeDriver: true,
+      }),
+    ]);
+
+    registerAnimation?.(componentId, animation);
+
     if (!animating) {
-      return undefined;
+      return () => {
+        registerAnimation?.(componentId, undefined);
+      };
     }
 
-    const animation = Animated.loop(
-      Animated.sequence([
-        Animated.timing(position.current, {
-          toValue: endPosition,
-          duration: duration,
-          easing,
-          useNativeDriver: true,
-        }),
-        Animated.timing(position.current, {
-          toValue: startPosition,
-          duration: 0,
-          useNativeDriver: true,
-        }),
-      ]),
-    );
+    const loop = Animated.loop(animation);
 
-    animation.start();
+    loop.start();
 
     return () => {
-      animation.stop();
+      registerAnimation?.(componentId, undefined);
+      loop.stop();
     };
-  }, [animating, duration, startPosition, endPosition, easing]);
+  }, [
+    animating,
+    duration,
+    startPosition,
+    endPosition,
+    easing,
+    registerAnimation,
+    componentId,
+  ]);
 
   return (
     <View style={containerStyles}>
