@@ -77,6 +77,18 @@ export type ShimmerLayoutContainerType = CommonLayoutType & {
    */
   justifyContent?: ViewStyle['justifyContent'];
   /**
+   * Set the gaps (gutters) between rows and columns
+   */
+  gap?: ViewStyle['gap'];
+  /**
+   * Set the size of the gap (gutter) between an element's rows
+   */
+  rowGap?: ViewStyle['rowGap'];
+  /**
+   * Set the size of the gap (gutter) between an element's columns.
+   */
+  columnGap?: ViewStyle['columnGap'];
+  /**
    * Children content layout
    */
   content: Array<ShimmerLayoutItemType | ShimmerLayoutContainerType>;
@@ -138,6 +150,9 @@ const ShimmerLayout = ({layout, ...shimmerProps}: ShimmerLayoutPropsType) => {
           marginBottom: layout.marginBottom,
           marginLeft: layout.marginLeft,
           marginRight: layout.marginRight,
+          gap: layout.gap,
+          columnGap: layout.columnGap,
+          rowGap: layout.rowGap,
         },
         layout.style,
       ]}>

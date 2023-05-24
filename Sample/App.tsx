@@ -180,31 +180,27 @@ const layoutExample: ShimmerLayoutContainerType = {
     {
       marginTop: 16,
       flexDirection: 'row',
+      columnGap: 16,
       content: [
         {
           width: 100,
           height: 100,
-          marginRight: 16,
         },
         {
           width: 100,
           height: 100,
-          marginRight: 16,
         },
         {
           width: 100,
           height: 100,
-          marginRight: 16,
         },
         {
           width: 100,
           height: 100,
-          marginRight: 16,
         },
         {
           width: 100,
           height: 100,
-          marginRight: 16,
         },
       ],
     },
