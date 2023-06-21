@@ -99,7 +99,7 @@ For more complex layouts, you can use the `ShimmerLayout` component.
 
 ```jsx
 import LinearGradient from 'react-native-linear-gradient'; // or 'expo-linear-gradient'
-import {ShimmerLayout} from 'react-native-gradient-shimmer';
+import {ShimmerLayout, ShimmerLayoutContainerType} from 'react-native-gradient-shimmer';
 
 const layoutExample: ShimmerLayoutContainerType = {
    content: [
