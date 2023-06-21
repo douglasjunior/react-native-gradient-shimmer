@@ -88,7 +88,7 @@ export type GradientShimmerPropsType = {
 
 const isRealPositiveNumber = (value: unknown): value is number => {
   return Boolean(
-    value && Number.isFinite(value) && typeof value === 'number' && value > 0,
+    typeof value === 'number' && Number.isFinite(value) && value > 0,
   );
 };
 
@@ -125,12 +125,12 @@ const GradientShimmer = ({
     if (typeof width === 'number') {
       styles.push({width});
     }
-    return styles;
+    return StyleSheet.flatten(styles);
   }, [height, style, width, backgroundColor]);
 
-  const linearLayoutStyles = useMemo(() => {
-    const styles: StyleProp<ViewStyle>[] = [
-      {
+  const linearLayoutStyles: Animated.AnimatedProps<StyleProp<ViewStyle>> =
+    useMemo(
+      () => ({
         position: 'absolute',
         top: 0,
         bottom: 0,
@@ -138,16 +138,15 @@ const GradientShimmer = ({
         width: highlightWidth,
         transform: [
           {
-            translateX: position.current as unknown as number,
+            translateX: position.current,
           },
         ],
-      },
-    ];
-    return styles;
-  }, [highlightWidth]);
+      }),
+      [highlightWidth],
+    );
 
   const calculatedWidth = useMemo(() => {
-    const {width: flatWidth} = StyleSheet.flatten(containerStyles);
+    const {width: flatWidth} = containerStyles;
 
     if (!isRealPositiveNumber(flatWidth)) {
       console.error(
@@ -164,6 +163,10 @@ const GradientShimmer = ({
   useEffect(() => {
     position.current.setValue(startPosition);
 
+    if (!animating) {
+      return undefined;
+    }
+
     const animation = Animated.sequence([
       Animated.timing(position.current, {
         toValue: endPosition,
@@ -178,9 +181,9 @@ const GradientShimmer = ({
       }),
     ]);
 
-    registerAnimation?.(componentId, animation);
+    if (registerAnimation) {
+      registerAnimation?.(componentId, animation);
 
-    if (!animating) {
       return () => {
         registerAnimation?.(componentId, undefined);
       };
@@ -191,7 +194,6 @@ const GradientShimmer = ({
     loop.start();
 
     return () => {
-      registerAnimation?.(componentId, undefined);
       loop.stop();
     };
   }, [

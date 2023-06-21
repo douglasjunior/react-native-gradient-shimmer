@@ -134,7 +134,6 @@ const ShimmerLayout = ({layout, ...shimmerProps}: ShimmerLayoutPropsType) => {
           },
           item.style,
         ]}
-        animating={false}
       />
     );
   };

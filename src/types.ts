@@ -20,11 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import type {StyleProp, ViewStyle} from 'react-native/types';
-
 export type LinearGradientPropsType = {
   colors: any;
-  style?: StyleProp<ViewStyle>;
+  style?: any;
   start?: any;
   end?: any;
 };

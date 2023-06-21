@@ -27,7 +27,7 @@ import {LinearGradientPropsType} from './types';
 
 export type BaseLinearGradientPropsType = {
   LinearGradient: ComponentType<LinearGradientPropsType>;
-  style: StyleProp<ViewStyle>;
+  style: Animated.AnimatedProps<StyleProp<ViewStyle>> | StyleProp<ViewStyle>;
   backgroundColor: string;
   highlightColor: string;
 };
