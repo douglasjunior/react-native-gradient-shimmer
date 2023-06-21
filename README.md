@@ -182,6 +182,9 @@ See more in the [Sample project](https://github.com/douglasjunior/react-native-g
 |flexDirection|'row' \| 'column' \| 'row-reverse' \| 'column-reverse' \| undefined|FlexBox flexDirection|
 |alignItems|`FlexAlignType`|FlexBox alignItems|
 |justifyContent|`FlexAlignType`|FlexBox justifyContent|
+|gap|`number`|Set the gaps (gutters) between rows and columns|
+|rowGap|`number`|Set the size of the gap (gutter) between an element's rows|
+|columnGap|`number`|Set the size of the gap (gutter) between an element's columns|
 |content|`Array<ShimmerLayoutItemType \| ShimmerLayoutContainerType>`|Children content layout|
 
 ### ShimmerLayoutItemType
