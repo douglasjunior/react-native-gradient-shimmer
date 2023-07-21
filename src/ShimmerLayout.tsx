@@ -115,6 +115,7 @@ const isShimmerContainer = (
 };
 
 const ShimmerLayout = ({
+  testID,
   layout,
   defaultShimmerProps,
   ...shimmerProps
@@ -163,6 +164,7 @@ const ShimmerLayout = ({
 
   return (
     <View
+      testID={testID}
       style={[
         {
           flexDirection: layout.flexDirection,

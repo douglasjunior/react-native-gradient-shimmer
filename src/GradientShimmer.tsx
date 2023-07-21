@@ -44,6 +44,7 @@ import BaseLinearGradient from './BaseLinearGradient';
 import {LinearGradientPropsType} from './types';
 
 export type GradientShimmerPropsType = {
+  testID?: string;
   /**
    * Linear gradient component from `expo-linear-gradient` or `react-native-linear-gradient`
    */
@@ -93,6 +94,7 @@ const isRealPositiveNumber = (value: unknown): value is number => {
 };
 
 const GradientShimmer = ({
+  testID,
   duration,
   height,
   width,
@@ -207,7 +209,7 @@ const GradientShimmer = ({
   ]);
 
   return (
-    <View style={containerStyles}>
+    <View testID={testID} style={containerStyles}>
       <BaseLinearGradient
         LinearGradient={LinearGradientComponent}
         style={linearLayoutStyles}
