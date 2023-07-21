@@ -136,8 +136,8 @@ const ShimmerLayout = ({
 
     return (
       <GradientShimmer
-        {...defaultShimmerProps}
         {...shimmerProps}
+        {...defaultShimmerProps}
         key={index}
         width={item.width || defaultShimmerProps?.width}
         height={item.height || defaultShimmerProps?.height}
