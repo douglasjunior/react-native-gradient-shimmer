@@ -102,6 +102,10 @@ export type ShimmerLayoutPropsType = Omit<
    * Layout config tree
    */
   layout: ShimmerLayoutContainerType;
+  defaultShimmerProps?: Omit<
+    Partial<GradientShimmerPropsType>,
+    'LinearGradientComponent'
+  >;
 };
 
 const isShimmerContainer = (
@@ -110,28 +114,47 @@ const isShimmerContainer = (
   return 'content' in item;
 };
 
-const ShimmerLayout = ({layout, ...shimmerProps}: ShimmerLayoutPropsType) => {
+const ShimmerLayout = ({
+  layout,
+  defaultShimmerProps,
+  ...shimmerProps
+}: ShimmerLayoutPropsType) => {
   const renderShimmerItem = (
     item: ShimmerLayoutItemType | ShimmerLayoutContainerType,
     index: number,
   ) => {
     if (isShimmerContainer(item)) {
-      return <ShimmerLayout {...shimmerProps} key={index} layout={item} />;
+      return (
+        <ShimmerLayout
+          {...shimmerProps}
+          defaultShimmerProps={defaultShimmerProps}
+          key={index}
+          layout={item}
+        />
+      );
     }
 
     return (
       <GradientShimmer
+        {...defaultShimmerProps}
         {...shimmerProps}
         key={index}
-        width={item.width}
-        height={item.height}
+        width={item.width || defaultShimmerProps?.width}
+        height={item.height || defaultShimmerProps?.height}
         style={[
-          {
-            marginTop: item.marginTop,
-            marginBottom: item.marginBottom,
-            marginLeft: item.marginLeft,
-            marginRight: item.marginRight,
-          },
+          defaultShimmerProps?.style,
+          typeof item.marginTop === 'number'
+            ? {marginTop: item.marginTop}
+            : null,
+          typeof item.marginLeft === 'number'
+            ? {marginLeft: item.marginLeft}
+            : null,
+          typeof item.marginRight === 'number'
+            ? {marginRight: item.marginRight}
+            : null,
+          typeof item.marginBottom === 'number'
+            ? {marginBottom: item.marginBottom}
+            : null,
           item.style,
         ]}
       />
@@ -169,8 +192,13 @@ const ShimmerLayoutWithProvider = (props: ShimmerLayoutPropsType) => {
 };
 
 ShimmerLayoutWithProvider.defaultProps = {
-  ...gradientShimmerDefaultProps,
   visible: true,
+  duration: gradientShimmerDefaultProps.duration,
+  highlightWidth: gradientShimmerDefaultProps.highlightWidth,
+  highlightColor: gradientShimmerDefaultProps.highlightColor,
+  backgroundColor: gradientShimmerDefaultProps.backgroundColor,
+  animating: gradientShimmerDefaultProps.animating,
+  easing: gradientShimmerDefaultProps.easing,
 };
 
 export default memo(ShimmerLayoutWithProvider);

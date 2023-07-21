@@ -219,6 +219,11 @@ const ShimmerLayoutExample = () => {
       <ShimmerLayout
         LinearGradientComponent={LinearGradient}
         layout={layoutExample}
+        defaultShimmerProps={{
+          style: {
+            borderRadius: 8,
+          },
+        }}
       />
     </View>
   );
