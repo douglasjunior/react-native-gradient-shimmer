@@ -173,7 +173,7 @@ See more in the [Sample project](https://github.com/douglasjunior/react-native-g
 
 |Name|Type|Description|
 |-|-|-|
-|layout|`ShimmerLayoutContainerType`|Layout config tree|
+|layout|[`ShimmerLayoutContainerType`](#shimmerlayoutcontainertype)|Layout config tree|
 |defaultShimmerProps|[`GradientShimmer` props](#gradientshimmer-props)|Default props for GradientShimmer|
 
 ### ShimmerLayoutContainerType
