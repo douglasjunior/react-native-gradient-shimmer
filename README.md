@@ -169,11 +169,12 @@ See more in the [Sample project](https://github.com/douglasjunior/react-native-g
 
 ### ShimmerLayout props
 
-*Inherits [`GradientShimmer` props](#gradientshimmer-props)*
+*Inherits most of [`GradientShimmer` props](#gradientshimmer-props)*
 
 |Name|Type|Description|
 |-|-|-|
 |layout|`ShimmerLayoutContainerType`|Layout config tree|
+|defaultShimmerProps|[`GradientShimmer` props](#gradientshimmer-props)|Default props for GradientShimmer|
 
 ### ShimmerLayoutContainerType
 
