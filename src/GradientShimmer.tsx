@@ -52,39 +52,39 @@ export type GradientShimmerPropsType = {
   /**
    * Component `width` in DPI
    */
-  width?: number;
+  width: number;
   /**
    * Component `height` in DPI
    */
-  height?: number;
+  height: number;
   /**
    * Styles passed to the LinearGradient component
    */
-  style: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Background color in HEX or RGB
    */
-  backgroundColor: string;
+  backgroundColor?: string;
   /**
    * Highlight color in HEX or RGB
    */
-  highlightColor: string;
+  highlightColor?: string;
   /**
    * The size of the highlight effect in DPI
    */
-  highlightWidth: number;
+  highlightWidth?: number;
   /**
    * Duration of the animation in milliseconds
    */
-  duration: number;
+  duration?: number;
   /**
    * Start or stop de animation
    */
-  animating: boolean;
+  animating?: boolean;
   /**
    * Easing function used by `Animated.timing()` to convey physically believable motion in animations. Read more at https://reactnative.dev/docs/easing
    */
-  easing: EasingFunction;
+  easing?: EasingFunction;
 };
 
 const isRealPositiveNumber = (value: unknown): value is number => {
@@ -93,7 +93,7 @@ const isRealPositiveNumber = (value: unknown): value is number => {
   );
 };
 
-export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
+export const gradientShimmerDefaultProps = {
   duration: 1500,
   highlightWidth: 200,
   highlightColor: 'rgb(210,210,210)',
@@ -102,21 +102,19 @@ export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
   easing: Easing.linear,
 };
 
-const GradientShimmer = (props: GradientShimmerPropsType): JSX.Element => {
-  const {
-    testID,
-    duration,
-    height,
-    width,
-    style,
-    LinearGradientComponent,
-    backgroundColor,
-    highlightColor,
-    highlightWidth,
-    animating,
-    easing,
-  } = {...gradientShimmerDefaultProps, ...props};
-
+const GradientShimmer = ({
+  duration = gradientShimmerDefaultProps.duration,
+  highlightWidth = gradientShimmerDefaultProps.highlightWidth,
+  highlightColor = gradientShimmerDefaultProps.highlightColor,
+  backgroundColor = gradientShimmerDefaultProps.backgroundColor,
+  animating = gradientShimmerDefaultProps.animating,
+  easing = gradientShimmerDefaultProps.easing,
+  testID = undefined,
+  style = undefined,
+  height,
+  width,
+  LinearGradientComponent,
+}: GradientShimmerPropsType): JSX.Element => {
   const {registerAnimation} = useContext(AnimationContext) || {};
   const componentId = useId();
 
@@ -130,14 +128,10 @@ const GradientShimmer = (props: GradientShimmerPropsType): JSX.Element => {
       {
         overflow: 'hidden',
         backgroundColor,
+        height,
+        width,
       },
     ];
-    if (typeof height === 'number') {
-      styles.push({height});
-    }
-    if (typeof width === 'number') {
-      styles.push({width});
-    }
     return StyleSheet.flatten(styles);
   }, [height, style, width, backgroundColor]);
 
@@ -163,7 +157,7 @@ const GradientShimmer = (props: GradientShimmerPropsType): JSX.Element => {
 
     if (!isRealPositiveNumber(flatWidth)) {
       console.error(
-        'GradientShimmer requires `width` to be real positive numbers. You can pass `width` by prop or inside `style`',
+        'GradientShimmer requires `width` to be real positive numbers.',
       );
       return 100;
     }

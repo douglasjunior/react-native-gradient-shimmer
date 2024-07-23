@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React, {memo} from 'react';
+import React, {FunctionComponent, memo} from 'react';
 
 import GradientShimmer, {
   GradientShimmerPropsType,
@@ -30,11 +30,12 @@ import GradientShimmer, {
 /**
  * Create your own GradientShimmer instance with default props
  */
-const createGradientShimmer = <
+function createGradientShimmer<
   FixedProps extends Partial<GradientShimmerPropsType>,
->(
-  fixedProps: FixedProps,
-) => {
+>(fixedProps: FixedProps) {
+  type NonFixedProps = Partial<FixedProps> &
+    Omit<GradientShimmerPropsType, keyof FixedProps>;
+
   const GradientShimmerWrapper = (
     props: GradientShimmerPropsType,
   ): JSX.Element => {
@@ -47,7 +48,9 @@ const createGradientShimmer = <
     );
   };
 
-  return memo(GradientShimmerWrapper);
-};
+  return memo(
+    GradientShimmerWrapper,
+  ) as unknown as FunctionComponent<NonFixedProps>;
+}
 
 export default createGradientShimmer;

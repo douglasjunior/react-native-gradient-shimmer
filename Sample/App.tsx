@@ -12,7 +12,7 @@ import {
 // import LinearGradient from 'react-native-linear-gradient';
 import {LinearGradient} from 'expo-linear-gradient';
 
-import {
+import GradientShimmer, {
   ShimmerLayout,
   ShimmerLayoutContainerType,
   createGradientShimmer,
@@ -95,10 +95,17 @@ const CardShimmer = ({
   label,
   width,
   ...others
-}: Partial<GradientShimmerPropsType> & {label: string; width?: number}) => {
+}: {
+  label: string;
+  width?: GradientShimmerPropsType['width'];
+  highlightWidth?: GradientShimmerPropsType['highlightWidth'];
+  duration?: GradientShimmerPropsType['duration'];
+  backgroundColor?: GradientShimmerPropsType['backgroundColor'];
+  highlightColor?: GradientShimmerPropsType['highlightColor'];
+}) => {
   const {width: windowWidth} = useWindowDimensions();
   const horizontalMargin = 16;
-  const shimmerWidth = width || windowWidth - horizontalMargin * 2;
+  const shimmerWidth = width ?? windowWidth - horizontalMargin * 2;
   return (
     <View
       style={{
@@ -235,6 +242,15 @@ export default function App() {
       <StatusBar style="auto" translucent={false} />
 
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <View style={{padding: 16}}>
+          <Text style={styles.label}>Basic</Text>
+          <GradientShimmer
+            width={200}
+            height={100}
+            LinearGradientComponent={LinearGradient}
+          />
+        </View>
+
         <AvatarShimmer />
 
         <CardHorizontalShimmer />
