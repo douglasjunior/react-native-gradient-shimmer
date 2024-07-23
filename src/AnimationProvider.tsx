@@ -24,6 +24,7 @@ import React, {
   PropsWithChildren,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import {Animated} from 'react-native';
@@ -45,7 +46,7 @@ type AnimationProviderPropsType = PropsWithChildren<{
 
 const AnimationProvider = ({
   children,
-  animating,
+  animating = true,
 }: AnimationProviderPropsType) => {
   const [animations, setAnimations] = useState<
     Record<string, Animated.CompositeAnimation>
@@ -90,18 +91,18 @@ const AnimationProvider = ({
     };
   }, [animations, animating]);
 
+  const animatedValue = useMemo(
+    () => ({
+      registerAnimation,
+    }),
+    [registerAnimation],
+  );
+
   return (
-    <AnimationContext.Provider
-      value={{
-        registerAnimation,
-      }}>
+    <AnimationContext.Provider value={animatedValue}>
       {children}
     </AnimationContext.Provider>
   );
-};
-
-AnimationProvider.defaultProps = {
-  animating: true,
 };
 
 export default AnimationProvider;

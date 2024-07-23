@@ -33,6 +33,16 @@ export type BaseLinearGradientPropsType = {
 };
 
 class BaseLinearGradient extends PureComponent<BaseLinearGradientPropsType> {
+  private readonly start = {
+    x: 0,
+    y: 0,
+  };
+
+  private readonly end = {
+    x: 1,
+    y: 0,
+  };
+
   render() {
     const {style, LinearGradient, backgroundColor, highlightColor} = this.props;
 
@@ -44,14 +54,8 @@ class BaseLinearGradient extends PureComponent<BaseLinearGradientPropsType> {
           highlightColor,
           backgroundColor,
         ]}
-        start={{
-          x: 0,
-          y: 0,
-        }}
-        end={{
-          x: 1,
-          y: 0,
-        }}
+        start={this.start}
+        end={this.end}
         style={style}
       />
     );

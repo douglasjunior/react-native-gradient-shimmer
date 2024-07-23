@@ -93,19 +93,30 @@ const isRealPositiveNumber = (value: unknown): value is number => {
   );
 };
 
-const GradientShimmer = ({
-  testID,
-  duration,
-  height,
-  width,
-  style,
-  LinearGradientComponent,
-  backgroundColor,
-  highlightColor,
-  highlightWidth,
-  animating,
-  easing,
-}: GradientShimmerPropsType): JSX.Element => {
+export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
+  duration: 1500,
+  highlightWidth: 200,
+  highlightColor: 'rgb(210,210,210)',
+  backgroundColor: 'rgb(200,200,200)',
+  animating: true,
+  easing: Easing.linear,
+};
+
+const GradientShimmer = (props: GradientShimmerPropsType): JSX.Element => {
+  const {
+    testID,
+    duration,
+    height,
+    width,
+    style,
+    LinearGradientComponent,
+    backgroundColor,
+    highlightColor,
+    highlightWidth,
+    animating,
+    easing,
+  } = {...gradientShimmerDefaultProps, ...props};
+
   const {registerAnimation} = useContext(AnimationContext) || {};
   const componentId = useId();
 
@@ -219,16 +230,5 @@ const GradientShimmer = ({
     </View>
   );
 };
-
-export const gradientShimmerDefaultProps: Partial<GradientShimmerPropsType> = {
-  duration: 1500,
-  highlightWidth: 200,
-  highlightColor: 'rgb(210,210,210)',
-  backgroundColor: 'rgb(200,200,200)',
-  animating: true,
-  easing: Easing.linear,
-};
-
-GradientShimmer.defaultProps = gradientShimmerDefaultProps;
 
 export default memo(GradientShimmer);

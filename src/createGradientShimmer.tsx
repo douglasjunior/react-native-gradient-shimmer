@@ -38,12 +38,13 @@ const createGradientShimmer = <
   const GradientShimmerWrapper = (
     props: GradientShimmerPropsType,
   ): JSX.Element => {
-    return <GradientShimmer {...props} />;
-  };
-
-  GradientShimmerWrapper.defaultProps = {
-    ...gradientShimmerDefaultProps,
-    ...fixedProps,
+    return (
+      <GradientShimmer
+        {...gradientShimmerDefaultProps}
+        {...fixedProps}
+        {...props}
+      />
+    );
   };
 
   return memo(GradientShimmerWrapper);

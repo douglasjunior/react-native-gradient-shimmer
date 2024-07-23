@@ -20,14 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
 
 import AnimationProvider from './AnimationProvider';
-import GradientShimmer, {
-  GradientShimmerPropsType,
-  gradientShimmerDefaultProps,
-} from './GradientShimmer';
+import GradientShimmer, {GradientShimmerPropsType} from './GradientShimmer';
 
 type CommonLayoutType = {
   /**
@@ -114,52 +111,71 @@ const isShimmerContainer = (
   return 'content' in item;
 };
 
+type LayoutItemPropsType = Omit<ShimmerLayoutPropsType, 'layout'> & {
+  item: ShimmerLayoutItemType | ShimmerLayoutContainerType;
+};
+
+const LayoutItem = ({
+  item,
+  defaultShimmerProps,
+  ...shimmerProps
+}: LayoutItemPropsType) => {
+  const itemStyles = useMemo(
+    () => [
+      defaultShimmerProps?.style,
+      typeof item.marginTop === 'number' ? {marginTop: item.marginTop} : null,
+      typeof item.marginLeft === 'number'
+        ? {marginLeft: item.marginLeft}
+        : null,
+      typeof item.marginRight === 'number'
+        ? {marginRight: item.marginRight}
+        : null,
+      typeof item.marginBottom === 'number'
+        ? {marginBottom: item.marginBottom}
+        : null,
+      item.style,
+    ],
+    [
+      defaultShimmerProps?.style,
+      item.marginBottom,
+      item.marginLeft,
+      item.marginRight,
+      item.marginTop,
+      item.style,
+    ],
+  );
+
+  if (isShimmerContainer(item)) {
+    return (
+      <ShimmerLayout
+        {...shimmerProps}
+        defaultShimmerProps={defaultShimmerProps}
+        layout={item}
+      />
+    );
+  }
+
+  return (
+    <GradientShimmer
+      {...shimmerProps}
+      {...defaultShimmerProps}
+      width={item.width ?? defaultShimmerProps?.width}
+      height={item.height ?? defaultShimmerProps?.height}
+      style={itemStyles}
+    />
+  );
+};
+
 const ShimmerLayout = ({
   testID,
   layout,
-  defaultShimmerProps,
   ...shimmerProps
 }: ShimmerLayoutPropsType) => {
   const renderShimmerItem = (
     item: ShimmerLayoutItemType | ShimmerLayoutContainerType,
     index: number,
   ) => {
-    if (isShimmerContainer(item)) {
-      return (
-        <ShimmerLayout
-          {...shimmerProps}
-          defaultShimmerProps={defaultShimmerProps}
-          key={index}
-          layout={item}
-        />
-      );
-    }
-
-    return (
-      <GradientShimmer
-        {...shimmerProps}
-        {...defaultShimmerProps}
-        key={index}
-        width={item.width || defaultShimmerProps?.width}
-        height={item.height || defaultShimmerProps?.height}
-        style={[
-          defaultShimmerProps?.style,
-          typeof item.marginTop === 'number'
-            ? {marginTop: item.marginTop}
-            : null,
-          typeof item.marginLeft === 'number'
-            ? {marginLeft: item.marginLeft}
-            : null,
-          typeof item.marginRight === 'number'
-            ? {marginRight: item.marginRight}
-            : null,
-          typeof item.marginBottom === 'number'
-            ? {marginBottom: item.marginBottom}
-            : null,
-          item.style,
-        ]}
-      />
-    );
+    return <LayoutItem key={index} item={item} {...shimmerProps} />;
   };
 
   return (
@@ -191,16 +207,6 @@ const ShimmerLayoutWithProvider = (props: ShimmerLayoutPropsType) => {
       <ShimmerLayout {...props} />
     </AnimationProvider>
   );
-};
-
-ShimmerLayoutWithProvider.defaultProps = {
-  visible: true,
-  duration: gradientShimmerDefaultProps.duration,
-  highlightWidth: gradientShimmerDefaultProps.highlightWidth,
-  highlightColor: gradientShimmerDefaultProps.highlightColor,
-  backgroundColor: gradientShimmerDefaultProps.backgroundColor,
-  animating: gradientShimmerDefaultProps.animating,
-  easing: gradientShimmerDefaultProps.easing,
 };
 
 export default memo(ShimmerLayoutWithProvider);
