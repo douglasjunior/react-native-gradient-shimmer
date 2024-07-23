@@ -41,7 +41,7 @@ export const AnimationContext = React.createContext<
 >(undefined);
 
 type AnimationProviderPropsType = PropsWithChildren<{
-  animating: boolean;
+  animating?: boolean;
 }>;
 
 const AnimationProvider = ({
