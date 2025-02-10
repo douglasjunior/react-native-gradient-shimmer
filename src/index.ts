@@ -31,3 +31,4 @@ export type {
 } from './ShimmerLayout';
 
 export {default as createGradientShimmer} from './createGradientShimmer';
+export {default as AnimationProvider} from './AnimationProvider';
