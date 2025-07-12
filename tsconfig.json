@@ -1,13 +1,3 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "noEmit": false,
-    "declaration": true,
-    "jsx": "react",
-    "sourceMap": true,
-    "removeComments": false
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "extends": "@react-native/typescript-config/tsconfig.json"
 }
