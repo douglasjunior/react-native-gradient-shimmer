@@ -21,13 +21,13 @@
 // SOFTWARE.
 
 import React, {ComponentType, PureComponent} from 'react';
-import {Animated, StyleProp, ViewStyle} from 'react-native';
+import {Animated, StyleSheet, View, ViewStyle} from 'react-native';
 
 import {LinearGradientPropsType} from './types';
 
 export type BaseLinearGradientPropsType = {
   LinearGradient: ComponentType<LinearGradientPropsType>;
-  style: Animated.AnimatedProps<StyleProp<ViewStyle>> | StyleProp<ViewStyle>;
+  style: ViewStyle;
   backgroundColor: string;
   highlightColor: string;
 };
@@ -47,17 +47,19 @@ class BaseLinearGradient extends PureComponent<BaseLinearGradientPropsType> {
     const {style, LinearGradient, backgroundColor, highlightColor} = this.props;
 
     return (
-      <LinearGradient
-        colors={[
-          backgroundColor,
-          highlightColor,
-          highlightColor,
-          backgroundColor,
-        ]}
-        start={this.start}
-        end={this.end}
-        style={style}
-      />
+      <View style={style}>
+        <LinearGradient
+          colors={[
+            backgroundColor,
+            highlightColor,
+            highlightColor,
+            backgroundColor,
+          ]}
+          start={this.start}
+          end={this.end}
+          style={StyleSheet.absoluteFill}
+        />
+      </View>
     );
   }
 }
