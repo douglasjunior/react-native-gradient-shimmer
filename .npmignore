@@ -14,9 +14,10 @@ app.json
 babel.config.js
 DEPENDENTS.md
 Gemfile
-index.js
 jest.config.js
 metro.config.js
 tsconfig.build.json
 tsconfig.json
 yarn.lock
+App.tsx
+/index.js
