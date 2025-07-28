@@ -1,7 +1,7 @@
 {
   "name": "react-native-gradient-shimmer",
   "displayName": "React-Native Gradient Renderer",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "⚛ A pure JavaScript, performant, typed shimmer component for Android and iOS.",
   "main": "lib",
   "react-native": "lib/index.ts",
