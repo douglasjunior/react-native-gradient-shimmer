@@ -215,7 +215,7 @@
       Performant, fluid shimmer &amp; skeleton loader for React Native.
     </text>
     <text x="0" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#838ab2" font-weight="400">
-      Zero native code · <tspan fill="#3fd0ff" font-weight="600">60 FPS nativeDriver</tspan> · Android, iOS &amp; Web.
+      Pure JavaScript · <tspan fill="#3fd0ff" font-weight="600">60 FPS nativeDriver</tspan> · Android, iOS &amp; Web.
     </text>
 
     <!-- Feature Bullet Cards -->
@@ -260,7 +260,7 @@
       <text x="378" y="17" font-family="ui-monospace, monospace" font-size="11.5" fill="#9ba1c7" text-anchor="middle">Android · iOS · Web</text>
 
       <rect x="476" width="154" height="26" rx="6" fill="rgba(63, 208, 255, 0.1)" stroke="rgba(63, 208, 255, 0.3)"/>
-      <text x="553" y="17" font-family="ui-monospace, monospace" font-size="11.5" fill="#3fd0ff" text-anchor="middle">Zero Native Code</text>
+      <text x="553" y="17" font-family="ui-monospace, monospace" font-size="11.5" fill="#3fd0ff" text-anchor="middle">Pure JavaScript</text>
     </g>
   </g>
 
@@ -273,8 +273,8 @@
     <!-- Phone Chassis -->
     <rect x="20" y="20" width="360" height="520" rx="44" fill="#0d0f27" stroke="url(#phone-border)" stroke-width="2.5"/>
 
-    <!-- Screen Inner Area (Clipped) -->
-    <g clip-path="url(#screen-clip)">
+    <!-- Screen Inner Area (Clipped with inverse transform) -->
+    <g transform="translate(-720, -40)" clip-path="url(#screen-clip)">
       <!-- App Screen Background -->
       <rect x="752" y="62" width="336" height="516" fill="#090b1e"/>
 
@@ -307,7 +307,7 @@
     </g>
 
     <!-- Floating Badge 1 (Top Left Overlap): Synchronized -->
-    <g transform="translate(-50, 62)">
+    <g transform="translate(-140, 30)">
       <g class="anim-hud-float">
         <rect width="190" height="46" rx="12" fill="rgba(13, 15, 36, 0.92)" stroke="#3fd0ff" stroke-width="1.4" filter="url(#card-shadow)"/>
         <circle cx="23" cy="23" r="12" fill="rgba(63, 208, 255, 0.15)"/>
@@ -318,7 +318,7 @@
     </g>
 
     <!-- Floating Badge 2 (Bottom Right Overlap): Pure JavaScript -->
-    <g transform="translate(185, 437)">
+    <g transform="translate(310, 445)">
       <g class="anim-badge-float">
         <rect width="190" height="46" rx="12" fill="rgba(13, 15, 36, 0.92)" stroke="#8b7bff" stroke-width="1.4" filter="url(#card-shadow)"/>
         <circle cx="23" cy="23" r="12" fill="rgba(139, 123, 255, 0.15)"/>

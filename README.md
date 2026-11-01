@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <b>React Native Gradient Shimmer</b> delivers buttery smooth 60 FPS skeleton loading screens across Android, iOS, and Web. Powered by React Native's native Animated driver and flexible linear gradient engines (<code>expo-linear-gradient</code> or <code>react-native-linear-gradient</code>), it brings zero native dependencies, declarative layout tree composition via <code>ShimmerLayout</code>, and perfectly synchronized animations with zero configuration drift.
+  <b>React Native Gradient Shimmer</b> delivers buttery smooth 60 FPS skeleton loading screens across Android, iOS, and Web. Powered by React Native's native Animated driver and flexible linear gradient engines (<code>expo-linear-gradient</code> or <code>react-native-linear-gradient</code>), it contains no native code in this package, supports declarative layout tree composition via <code>ShimmerLayout</code>, and delivers perfectly synchronized animations with zero configuration drift.
 </p>
 
 <p align="center">
@@ -88,9 +88,9 @@ export default function App() {
 
 <span id="why-gradient-shimmer"></span>
 
-- ⚡ **Pure JavaScript & Zero Native Bloat.** No native modules to compile, no complex C++ TurboModule Codegen setup, and no Pod linking issues. Installs in seconds.
+- ⚡ **Pure JavaScript Package.** No native code inside this package—simply bring your preferred gradient engine (`expo-linear-gradient` in Expo or `react-native-linear-gradient` in bare React Native). Installs in seconds.
 - 🏎 **60 FPS Animated Native Driver.** Dispatches translation transforms directly to the native UI thread via `useNativeDriver: true`. Animations stay silky smooth even when the JavaScript thread is busy loading data.
-- 🌐 **True Cross-Platform Parity.** Runs seamlessly across Android, iOS, and Web (Expo Web or `react-native-web`) with 100% visual and behavioral consistency.
+- 🌐 **Cross-Platform Support.** Delivers consistent behavior across Android, iOS, and Web (Expo Web or `react-native-web`).
 - 📐 **Declarative ShimmerLayout Trees.** Design intricate wireframes and multi-row skeleton loaders effortlessly using JSON layout configs with standard Flexbox properties (`flexDirection`, `gap`, `justifyContent`, `alignItems`).
 - 🔄 **Synchronized Group Animations.** Built-in `AnimationProvider` coordinates multiple skeleton elements into a unified `Animated.parallel` loop, ensuring your whole screen shimmers in perfect lockstep without phase drift.
 - 🔌 **Pluggable LinearGradient Engine.** Decoupled gradient dependency: seamlessly plug in `expo-linear-gradient` in Expo apps or `react-native-linear-gradient` in bare React Native projects.
@@ -115,10 +115,10 @@ Experience the live component in your browser or phone via the [Snack Online Dem
 
 <span id="requirements"></span>
 
-| Requirement            | Supported Version                                        | Notes                                     |
-| ---------------------- | -------------------------------------------------------- | ----------------------------------------- |
-| `react-native`         | `>= 0.60.0`                                              | React Native or Expo SDK                  |
-| Linear Gradient Engine | `expo-linear-gradient` or `react-native-linear-gradient` | Passed via `LinearGradientComponent` prop |
+| Requirement            | Declared Peer Dep                                        | Effective Minimum                      | Notes                                                                                                                                                |
+| ---------------------- | -------------------------------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `react-native`         | `>= 0.60.0`                                              | `>= 0.69.0` (or `>= 0.71.0` for `gap`) | Declared in `peerDependencies`. Note that `GradientShimmer` uses React 18+ (`useId`), and `ShimmerLayout` flexbox `gap` requires React Native 0.71+. |
+| Linear Gradient Engine | `expo-linear-gradient` or `react-native-linear-gradient` | Latest stable                          | Passed via the `LinearGradientComponent` prop.                                                                                                       |
 
 ---
 
@@ -202,7 +202,7 @@ export const UserCardSkeleton = () => {
 Avoid repeating `LinearGradientComponent` and styling props on every skeleton item by creating a tailored shimmer instance with preset defaults:
 
 ```tsx
-import {Easing} from 'react-native';
+import {Easing, View} from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import {createGradientShimmer} from 'react-native-gradient-shimmer';
 
@@ -346,7 +346,7 @@ All components, types, and factories are exported from `'react-native-gradient-s
 | ------------------------- | ---------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------- |
 | `LinearGradientComponent` | `ComponentType<LinearGradientPropsType>` | **Required**         | Linear gradient component from `expo-linear-gradient` or `react-native-linear-gradient`. |
 | `width`                   | `number`                                 | **Required**         | Component width in DPI (must be a positive number).                                      |
-| `height`                  | `number`                                 | **Required**         | Component height in DPI (must be a positive number).                                     |
+| `height`                  | `number`                                 | **Required**         | Component height in DPI.                                                                 |
 | `backgroundColor`         | `string`                                 | `'rgb(200,200,200)'` | Base placeholder background color in HEX, RGB, or RGBA.                                  |
 | `highlightColor`          | `string`                                 | `'rgb(210,210,210)'` | Highlight shimmer beam color in HEX, RGB, or RGBA.                                       |
 | `highlightWidth`          | `number`                                 | `200`                | Width of the animated gradient highlight beam in DPI.                                    |
