@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <b>React Native Gradient Shimmer</b> delivers buttery smooth 60 FPS skeleton loading screens across Android, iOS, and Web. Powered by React Native's native Animated driver and flexible linear gradient engines (<code>expo-linear-gradient</code> or <code>react-native-linear-gradient</code>), it contains no native code in this package, supports declarative layout tree composition via <code>ShimmerLayout</code>, and delivers perfectly synchronized animations with zero configuration drift.
+  <b>React Native Gradient Shimmer</b> delivers buttery smooth 60 FPS skeleton loading screens across Android, iOS, and Web. Powered by React Native's native Animated driver and flexible linear gradient engines (<code>expo-linear-gradient</code> or <code>react-native-linear-gradient</code>), it contains no native code in this package, supports declarative layout tree composition via <code>ShimmerLayout</code>, and coordinates animations across multiple skeleton elements.
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
   <a href="https://www.npmjs.com/package/react-native-gradient-shimmer"><img src="https://img.shields.io/npm/v/react-native-gradient-shimmer?style=flat-square&color=3FD0FF" alt="npm version"></a>
   <a href="https://www.npmjs.com/package/react-native-gradient-shimmer"><img src="https://img.shields.io/npm/dt/react-native-gradient-shimmer?style=flat-square&color=FF6A8E" alt="npm downloads"></a>
   <img src="https://img.shields.io/badge/platform-Android_%7C_iOS_%7C_Web-lightgrey?style=flat-square" alt="Platform Android, iOS, and Web">
-  <img src="https://img.shields.io/badge/React_Native->=0.60.0-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React Native >= 0.60.0">
+  <img src="https://img.shields.io/badge/React_Native->=0.69.0-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React Native >= 0.69.0">
   <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript strict">
   <a href="https://github.com/douglasjunior/react-native-gradient-shimmer/pulls"><img src="https://img.shields.io/badge/PRs-welcome-22C55E?style=flat-square" alt="PRs welcome"></a>
 </p>
@@ -89,10 +89,10 @@ export default function App() {
 <span id="why-gradient-shimmer"></span>
 
 - ⚡ **Pure JavaScript Package.** No native code inside this package—simply bring your preferred gradient engine (`expo-linear-gradient` in Expo or `react-native-linear-gradient` in bare React Native). Installs in seconds.
-- 🏎 **60 FPS Animated Native Driver.** Dispatches translation transforms directly to the native UI thread via `useNativeDriver: true`. Animations stay silky smooth even when the JavaScript thread is busy loading data.
+- 🏎 **60 FPS Animated Native Driver.** Dispatches translation transforms directly to the native UI thread via `useNativeDriver: true` for smooth active animation playback.
 - 🌐 **Cross-Platform Support.** Delivers consistent behavior across Android, iOS, and Web (Expo Web or `react-native-web`).
 - 📐 **Declarative ShimmerLayout Trees.** Design intricate wireframes and multi-row skeleton loaders effortlessly using JSON layout configs with standard Flexbox properties (`flexDirection`, `gap`, `justifyContent`, `alignItems`).
-- 🔄 **Synchronized Group Animations.** Built-in `AnimationProvider` coordinates multiple skeleton elements into a unified `Animated.parallel` loop, ensuring your whole screen shimmers in perfect lockstep without phase drift.
+- 🔄 **Synchronized Group Animations.** Built-in `AnimationProvider` coordinates multiple skeleton elements into a shared `Animated.parallel` loop to keep related shimmer elements aligned together.
 - 🔌 **Pluggable LinearGradient Engine.** Decoupled gradient dependency: seamlessly plug in `expo-linear-gradient` in Expo apps or `react-native-linear-gradient` in bare React Native projects.
 - 🎨 **Factory Customization.** Generate reusable, pre-configured component instances using `createGradientShimmer` with your app's brand colors, duration, and custom easing curves.
 - 📦 **Strict TypeScript Definitions.** Comprehensive TypeScript typing for props, layout configurations, and container items out of the box.
