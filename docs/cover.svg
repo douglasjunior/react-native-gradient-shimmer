@@ -1,0 +1,331 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <!-- Background Cosmic Gradients -->
+    <radialGradient id="nebula-violet" cx="18%" cy="18%" r="65%">
+      <stop offset="0%" stop-color="#5842d6" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#04050d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula-cyan" cx="84%" cy="24%" r="60%">
+      <stop offset="0%" stop-color="#1882be" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#04050d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula-pink" cx="45%" cy="94%" r="55%">
+      <stop offset="0%" stop-color="#be3c78" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#04050d" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Linear Gradients -->
+    <linearGradient id="cosmic-stripe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b7bff"/>
+      <stop offset="35%" stop-color="#3fd0ff"/>
+      <stop offset="70%" stop-color="#ff6a8e"/>
+      <stop offset="100%" stop-color="#ffd56a"/>
+    </linearGradient>
+    <linearGradient id="title-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#e9ebfa"/>
+      <stop offset="100%" stop-color="#3fd0ff"/>
+    </linearGradient>
+    <linearGradient id="phone-border" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3fd0ff" stop-opacity="0.65"/>
+      <stop offset="50%" stop-color="#8b7bff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff6a8e" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="shimmer-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3fd0ff" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#8b7bff" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="65%" stop-color="#3fd0ff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff6a8e" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glow-violet" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Screen Clipping -->
+    <clipPath id="screen-clip">
+      <rect x="752" y="62" width="336" height="516" rx="28"/>
+    </clipPath>
+
+    <!-- Skeleton Mask for Shimmer Highlight -->
+    <mask id="phone-skeleton-mask">
+      <!-- Black background hides everything -->
+      <rect x="752" y="62" width="336" height="516" fill="#000000"/>
+
+      <!-- User avatar & header lines -->
+      <circle cx="792" cy="158" r="18" fill="#ffffff"/>
+      <rect x="822" y="148" width="115" height="11" rx="3" fill="#ffffff"/>
+      <rect x="822" y="163" width="70" height="9" rx="2.5" fill="#ffffff"/>
+
+      <!-- Media Banner Card -->
+      <rect x="772" y="190" width="296" height="115" rx="10" fill="#ffffff"/>
+
+      <!-- Text lines below media -->
+      <rect x="772" y="318" width="280" height="11" rx="3" fill="#ffffff"/>
+      <rect x="772" y="334" width="220" height="10" rx="3" fill="#ffffff"/>
+      <rect x="772" y="349" width="150" height="9" rx="2.5" fill="#ffffff"/>
+
+      <!-- Tags row -->
+      <rect x="772" y="372" width="70" height="22" rx="6" fill="#ffffff"/>
+      <rect x="850" y="372" width="70" height="22" rx="6" fill="#ffffff"/>
+      <rect x="928" y="372" width="70" height="22" rx="6" fill="#ffffff"/>
+
+      <!-- List item 1 -->
+      <rect x="772" y="410" width="50" height="50" rx="8" fill="#ffffff"/>
+      <rect x="832" y="418" width="190" height="11" rx="3" fill="#ffffff"/>
+      <rect x="832" y="434" width="140" height="9" rx="2.5" fill="#ffffff"/>
+      <rect x="832" y="448" width="85" height="8" rx="2" fill="#ffffff"/>
+
+      <!-- List item 2 -->
+      <rect x="772" y="472" width="50" height="42" rx="8" fill="#ffffff"/>
+      <rect x="832" y="478" width="180" height="11" rx="3" fill="#ffffff"/>
+      <rect x="832" y="494" width="120" height="9" rx="2.5" fill="#ffffff"/>
+
+      <!-- Bottom Tab Bar placehoders -->
+      <circle cx="806" cy="544" r="9" fill="#ffffff"/>
+      <circle cx="870" cy="544" r="9" fill="#ffffff"/>
+      <circle cx="934" cy="544" r="9" fill="#ffffff"/>
+      <circle cx="998" cy="544" r="9" fill="#ffffff"/>
+    </mask>
+
+    <style>
+      <![CDATA[
+      .anim-shimmer-sweep,
+      .anim-hud-float,
+      .anim-badge-float {
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .anim-star-twinkle {
+          animation: starTwinkle 4s ease-in-out infinite;
+        }
+        .anim-shimmer-sweep {
+          animation: shimmerMove 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        .anim-hud-float {
+          animation: hudFloat 4.5s ease-in-out infinite;
+        }
+        .anim-badge-float {
+          animation: badgeFloat 5s ease-in-out infinite;
+        }
+      }
+
+      @keyframes starTwinkle {
+        0%, 100% { opacity: 0.25; }
+        50%      { opacity: 0.85; }
+      }
+
+      @keyframes shimmerMove {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(580px);
+        }
+      }
+
+      @keyframes hudFloat {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-4px); }
+      }
+
+      @keyframes badgeFloat {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-3px); }
+      }
+      ]]>
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1280" height="640" rx="20" fill="#04050d"/>
+  <rect width="1280" height="640" rx="20" fill="url(#nebula-violet)"/>
+  <rect width="1280" height="640" rx="20" fill="url(#nebula-cyan)"/>
+  <rect width="1280" height="640" rx="20" fill="url(#nebula-pink)"/>
+
+  <!-- Subtle Cosmic Grid -->
+  <g opacity="0.10">
+    <line x1="80" y1="0" x2="80" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="360" y1="0" x2="360" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="520" y1="0" x2="520" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="680" y1="0" x2="680" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="840" y1="0" x2="840" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="1160" y1="0" x2="1160" y2="640" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="0" y1="80" x2="1280" y2="80" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1280" y2="200" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="0" y1="320" x2="1280" y2="320" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="0" y1="440" x2="1280" y2="440" stroke="#8b7bff" stroke-width="1"/>
+    <line x1="0" y1="560" x2="1280" y2="560" stroke="#8b7bff" stroke-width="1"/>
+  </g>
+
+  <!-- Stars -->
+  <g class="anim-star-twinkle" fill="#ffd56a">
+    <circle cx="140" cy="90" r="1.5" opacity="0.6"/>
+    <circle cx="280" cy="460" r="1.2" opacity="0.4"/>
+    <circle cx="620" cy="110" r="1.8" opacity="0.7"/>
+    <circle cx="690" cy="520" r="1.4" opacity="0.5"/>
+    <circle cx="1180" cy="140" r="2.0" opacity="0.8"/>
+    <circle cx="1120" cy="560" r="1.3" opacity="0.4"/>
+  </g>
+  <g fill="#3fd0ff">
+    <circle cx="110" cy="340" r="1.2" opacity="0.5"/>
+    <circle cx="560" cy="390" r="1.6" opacity="0.6"/>
+    <circle cx="720" cy="80" r="1.2" opacity="0.4"/>
+    <circle cx="1220" cy="400" r="1.5" opacity="0.7"/>
+  </g>
+
+  <!-- Outer Border Frame -->
+  <rect x="1" y="1" width="1278" height="638" rx="19" fill="none" stroke="rgba(150, 160, 255, 0.16)" stroke-width="2"/>
+  <!-- Cosmic Gradient Stripe at Bottom -->
+  <rect x="0" y="635" width="1280" height="5" fill="url(#cosmic-stripe)"/>
+
+  <!-- ==================== LEFT COLUMN: CONTENT ==================== -->
+  <g transform="translate(80, 0)">
+    <!-- Category Pill -->
+    <g transform="translate(0, 92)">
+      <rect width="320" height="32" rx="16" fill="rgba(139, 123, 255, 0.12)" stroke="#8b7bff" stroke-width="1.2"/>
+      <circle cx="18" cy="16" r="4" fill="#3fd0ff"/>
+      <text x="32" y="21" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#e9ebfa" letter-spacing="1">REACT NATIVE · SKELETON LOADER</text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="0" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="-0.5">
+      react-native-
+    </text>
+    <text x="0" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="46" font-weight="800" fill="url(#title-grad)" letter-spacing="-0.5">
+      gradient-shimmer
+    </text>
+
+    <!-- Subtitle / One-liner -->
+    <text x="0" y="286" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#9ba1c7" font-weight="400">
+      Performant, fluid shimmer &amp; skeleton loader for React Native.
+    </text>
+    <text x="0" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#838ab2" font-weight="400">
+      Pure JavaScript · <tspan fill="#3fd0ff" font-weight="600">60 FPS nativeDriver</tspan> · Android, iOS &amp; Web.
+    </text>
+
+    <!-- Feature Bullet Cards -->
+    <g transform="translate(0, 350)">
+      <!-- Item 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="560" height="50" rx="12" fill="rgba(13, 15, 36, 0.65)" stroke="rgba(150, 160, 255, 0.14)" stroke-width="1"/>
+        <circle cx="26" cy="25" r="10" fill="rgba(63, 208, 255, 0.15)"/>
+        <text x="26" y="29" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#3fd0ff" text-anchor="middle">⚡</text>
+        <text x="50" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="700" fill="#e9ebfa">60 FPS Animated Native Driver</text>
+        <text x="50" y="41" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#9ba1c7">Offloads translateX transforms to the native thread for buttery smoothness</text>
+      </g>
+
+      <!-- Item 2 -->
+      <g transform="translate(0, 62)">
+        <rect width="560" height="50" rx="12" fill="rgba(13, 15, 36, 0.65)" stroke="rgba(150, 160, 255, 0.14)" stroke-width="1"/>
+        <circle cx="26" cy="25" r="10" fill="rgba(139, 123, 255, 0.15)"/>
+        <text x="26" y="29" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#8b7bff" text-anchor="middle">📐</text>
+        <text x="50" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="700" fill="#e9ebfa">Declarative ShimmerLayout Trees</text>
+        <text x="50" y="41" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#9ba1c7">Build complex multi-row skeleton screens with an intuitive JSON config</text>
+      </g>
+
+      <!-- Item 3 -->
+      <g transform="translate(0, 124)">
+        <rect width="560" height="50" rx="12" fill="rgba(13, 15, 36, 0.65)" stroke="rgba(150, 160, 255, 0.14)" stroke-width="1"/>
+        <circle cx="26" cy="25" r="10" fill="rgba(255, 106, 142, 0.15)"/>
+        <text x="26" y="29" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#ff6a8e" text-anchor="middle">🎨</text>
+        <text x="50" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="700" fill="#e9ebfa">Dual Pluggable Gradient Engine</text>
+        <text x="50" y="41" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#9ba1c7">Seamless with expo-linear-gradient or react-native-linear-gradient</text>
+      </g>
+    </g>
+
+    <!-- Bottom Metadata Chips -->
+    <g transform="translate(0, 545)">
+      <rect width="110" height="26" rx="6" fill="rgba(255, 255, 255, 0.05)" stroke="rgba(255, 255, 255, 0.12)"/>
+      <text x="55" y="17" font-family="ui-monospace, monospace" font-size="11.5" fill="#9ba1c7" text-anchor="middle">MIT License</text>
+
+      <rect x="120" width="160" height="26" rx="6" fill="rgba(255, 255, 255, 0.05)" stroke="rgba(255, 255, 255, 0.12)"/>
+      <text x="200" y="17" font-family="ui-monospace, monospace" font-size="11.5" fill="#9ba1c7" text-anchor="middle">TypeScript Strict</text>
+
+      <rect x="290" width="176" height="26" rx="6" fill="rgba(255, 255, 255, 0.05)" stroke="rgba(255, 255, 255, 0.12)"/>
+      <text x="378" y="17" font-family="ui-monospace, monospace" font-size="11.5" fill="#9ba1c7" text-anchor="middle">Android · iOS · Web</text>
+
+      <rect x="476" width="154" height="26" rx="6" fill="rgba(63, 208, 255, 0.1)" stroke="rgba(63, 208, 255, 0.3)"/>
+      <text x="553" y="17" font-family="ui-monospace, monospace" font-size="11.5" fill="#3fd0ff" text-anchor="middle">Pure JavaScript</text>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT COLUMN: ANIMATED PHONE SKELETON ==================== -->
+  <g transform="translate(740, 48)">
+    <!-- Glow behind phone -->
+    <rect x="20" y="20" width="360" height="520" rx="46" fill="none" stroke="rgba(63, 208, 255, 0.3)" stroke-width="16" opacity="0.25" filter="url(#glow-cyan)"/>
+    <rect x="20" y="20" width="360" height="520" rx="46" fill="none" stroke="rgba(139, 123, 255, 0.4)" stroke-width="20" opacity="0.25" filter="url(#glow-violet)"/>
+
+    <!-- Phone Chassis -->
+    <rect x="20" y="20" width="360" height="520" rx="44" fill="#0d0f27" stroke="url(#phone-border)" stroke-width="2.5"/>
+
+    <!-- Screen Inner Area (Clipped with inverse transform) -->
+    <g transform="translate(-720, -40)" clip-path="url(#screen-clip)">
+      <!-- App Screen Background -->
+      <rect x="752" y="62" width="336" height="516" fill="#090b1e"/>
+
+      <!-- App Header Bar -->
+      <rect x="752" y="62" width="336" height="60" fill="rgba(19, 23, 54, 0.75)"/>
+      <text x="774" y="112" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="700" fill="#e9ebfa">Feed Skeleton</text>
+      <circle cx="1060" cy="107" r="11" fill="rgba(255, 255, 255, 0.08)"/>
+
+      <!-- Base Skeleton Shapes (Visible by default) -->
+      <rect x="752" y="62" width="336" height="516" fill="#141838" mask="url(#phone-skeleton-mask)"/>
+
+      <!-- Animated Shimmer Beam (Glides across skeleton shapes) -->
+      <g mask="url(#phone-skeleton-mask)">
+        <g transform="translate(752, 62)">
+          <g class="anim-shimmer-sweep">
+            <rect x="-220" y="0" width="200" height="516" fill="url(#shimmer-grad)"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- App Status Bar / Dynamic Island -->
+      <rect x="875" y="72" width="90" height="18" rx="9" fill="#04050d"/>
+      <circle cx="892" cy="81" r="4" fill="#1a1c3b"/>
+      <circle cx="945" cy="81" r="3" fill="#1a1c3b"/>
+      <text x="776" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#9ba1c7">9:41</text>
+      <!-- Battery & Wifi glyphs -->
+      <path d="M1050 81 L1054 77 L1058 81" stroke="#9ba1c7" stroke-width="1.2" fill="none"/>
+      <rect x="1064" y="76" width="16" height="9" rx="2" fill="none" stroke="#9ba1c7" stroke-width="1"/>
+      <rect x="1066" y="78" width="10" height="5" rx="1" fill="#9ba1c7"/>
+    </g>
+
+    <!-- Floating Badge 1 (Top Left Overlap): Synchronized -->
+    <g transform="translate(-140, 30)">
+      <g class="anim-hud-float">
+        <rect width="190" height="46" rx="12" fill="rgba(13, 15, 36, 0.92)" stroke="#3fd0ff" stroke-width="1.4" filter="url(#card-shadow)"/>
+        <circle cx="23" cy="23" r="12" fill="rgba(63, 208, 255, 0.15)"/>
+        <text x="23" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#3fd0ff" text-anchor="middle">⚡</text>
+        <text x="44" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#e9ebfa">Synchronized</text>
+        <text x="44" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#9ba1c7">All items in lockstep</text>
+      </g>
+    </g>
+
+    <!-- Floating Badge 2 (Bottom Right Overlap): Pure JavaScript -->
+    <g transform="translate(310, 445)">
+      <g class="anim-badge-float">
+        <rect width="190" height="46" rx="12" fill="rgba(13, 15, 36, 0.92)" stroke="#8b7bff" stroke-width="1.4" filter="url(#card-shadow)"/>
+        <circle cx="23" cy="23" r="12" fill="rgba(139, 123, 255, 0.15)"/>
+        <text x="23" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#8b7bff" text-anchor="middle">⚛</text>
+        <text x="44" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#e9ebfa">Pure JavaScript</text>
+        <text x="44" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#3fd0ff">60 FPS nativeDriver</text>
+      </g>
+    </g>
+  </g>
+</svg>
